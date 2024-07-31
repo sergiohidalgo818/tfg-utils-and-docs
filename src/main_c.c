@@ -36,15 +36,15 @@ int main()
 
     regular_values_continue = hindmarsh_rose(regular_values[regular_lines - 1][0], regular_values[regular_lines - 1][1], regular_values[regular_lines - 1][2], (regular_values[regular_lines - 1][3]), 0.001, 10000.0, 3.0, 0.0021, 4.0, &regular_lines_continue);
 
-    chaotic_values_continue = hindmarsh_rose(chaotic_values[chaotic_lines - 1][0], chaotic_values[chaotic_lines - 1][1], chaotic_values[chaotic_lines - 1][2], (chaotic_values[chaotic_lines - 1][3]), 0.001, 10000.0, 3.0, 0.0021, 4.0, &chaotic_lines_continue);
+    chaotic_values_continue = hindmarsh_rose(chaotic_values[chaotic_lines - 1][0], chaotic_values[chaotic_lines - 1][1], chaotic_values[chaotic_lines - 1][2], (chaotic_values[chaotic_lines - 1][3]), 0.001, 10000.0, 3.281, 0.0021, 4.0, &chaotic_lines_continue);
 
     end_all_functions = (double)clock();
     end_all_functions = end_all_functions / CLOCKS_PER_SEC;
 
-    write_on_file("./data/HidmarshRoseRegular_c.dat", regular_values, regular_lines);
-    write_on_file("./data/HidmarshRoseChaotic_c.dat", chaotic_values, chaotic_lines);
-    write_on_file("./data/HidmarshRoseRegular_continue_c.dat", regular_values_continue, regular_lines_continue);
-    write_on_file("./data/HidmarshRoseChaotic_continue_c.dat", chaotic_values_continue, chaotic_lines_continue);
+    write_on_file("./data/HindmarshRoseRegular_c.dat", regular_values, regular_lines);
+    write_on_file("./data/HindmarshRoseChaotic_c.dat", chaotic_values, chaotic_lines);
+    write_on_file("./data/HindmarshRoseRegular_continue_c.dat", regular_values_continue, regular_lines_continue);
+    write_on_file("./data/HindmarshRoseChaotic_continue_c.dat", chaotic_values_continue, chaotic_lines_continue);
 
     end_writing_operations = (double)clock();
     end_writing_operations = end_writing_operations / CLOCKS_PER_SEC;

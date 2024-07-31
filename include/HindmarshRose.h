@@ -2,7 +2,7 @@
 #define HINDMARSHROSE_H
 
 #include "Model.h"
-
+#define ElemsInModel 4
 /**
  * @class This class implements the model of hindmarsh-Rose.
  *
@@ -20,10 +20,10 @@ class HindmarshRose : public Model
 public:
     enum StationaryMode
     {
-        X_Stationary,
+        Z_Stationary,
         Y_Stationary,
-        XY_Stationary,
-        None_Stationar
+        ZY_Stationary,
+        None_Stationary
     };
 
     float x;
@@ -32,33 +32,31 @@ public:
     float e;
     float S;
     float m;
+    HindmarshRose::StationaryMode mode;
 
-private:
-    bool perpetual;
 
 public:
     /**
      * @brief This function initialices the model.
      *
-     * @param x value x
-     * @param y the value y
      * @param time_increment incremet of the time (time step)
      * @param filename name of the file to write
+     * @param initial_x value of intial x
      * @param m value of the m constant
      * @param e value of the e constant (> 3.0  is chaotic)
      * @param S value of the S constant
      *
      * @return Returns the model initialized.
      */
-    HindmarshRose(double time_increment, const char *filename, float e, float m, float S);
+    HindmarshRose(double time_increment, const char *filename, float initial_x, float e, float m, float S);
 
     /**
-     * @brief This function is the constructor of the models.
+     * @brief This function initialices the model.
      *
-     * @param x value x
-     * @param y the value y
-     * @param start_time time for the nodel to start
      * @param time_increment incremet of the time (time step)
+     * @param initial_x value of intial x
+     * @param initial_y value of intial y
+     * @param initial_z value of intial z
      * @param filename name of the file to write
      * @param m value of the m constant
      * @param e value of the e constant (> 3.0  is chaotic)
@@ -66,91 +64,94 @@ public:
      *
      * @return Returns the model initialized.
      */
-    HindmarshRose(float start_time, double time_increment, const char *filename, float e, float m, float S);
+    HindmarshRose(double time_increment, const char *filename, float initial_x, float initial_y, float initial_z, float e, float m, float S);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_x value of intial x
+     * @param initial_yz value of initial y or value of initial z (depends on the mode)
+     * @param m value of the m constant
+     * @param e value of the e constant (> 3.0  is chaotic)
+     * @param S value of the S constant
+     * @param mode mode of the stationary values
+     *
+     * @return Returns the model initialized.
+     */
+    HindmarshRose(double time_increment, const char *filename, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param start_time time of starting
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_x value of intial x
+     * @param m value of the m constant
+     * @param e value of the e constant (> 3.0  is chaotic)
+     * @param S value of the S constant
+     *
+     * @return Returns the model initialized.
+     */
+    HindmarshRose(float start_time, double time_increment, const char *filename, float initial_x, float e, float m, float S);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param start_time time of starting
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_x value of intial x
+     * @param initial_y value of intial y
+     * @param initial_z value of intial z
+     * @param y value y
+     * @param z value z
+     * @param m value of the m constant
+     * @param e value of the e constant (> 3.0  is chaotic)
+     * @param S value of the S constant
+     *
+     * @return Returns the model initialized.
+     */
+    HindmarshRose(float start_time, double time_increment, const char *filename, float initial_x, float initial_y, float initial_z, float e, float m, float S);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param start_time time of starting
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_x value of intial x
+     * @param initial_yz value of initial y or value of initial z (depends on the mode)
+     * @param m value of the m constant
+     * @param e value of the e constant (> 3.0  is chaotic)
+     * @param S value of the S constant
+     * @param mode mode of the stationary values
+     *
+     * @return Returns the model initialized.
+     */
+    HindmarshRose(float start_time, double time_increment, const char *filename, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode);
 
     /**
      * @brief This function calculates t + t_increment on the model.
      *
-     *
      */
-
     void calculate();
-
-    /**
-     * @brief This function loops t + t_increment until it reaches the target and
-     *  calculates y and z in stationary mode.
-     *
-     * @param x value x
-     * @param target_time time to reach
-     */
-    void objective_loop_stationary_yz(float x, double time);
-
-    /**
-     * @brief This function loops t + t_increment until it reaches the target
-     * and calculates both z and y in stationary mode.
-     *
-     * @param x value x
-     * @param y value y
-     * @param target_time time to reach
-     */
-    void objective_loop_stationary_z(float x, float y, double target_time);
-
-    /**
-     * @brief This function loops t + t_increment until it reaches the target
-     * and calculates z in stationary mode.
-     *
-     * @param x value x
-     * @param z value z
-     * @param target_time time to reach
-     */
-    void objective_loop_stationary_y(float x, float z, double target_time);
 
     /**
      * @brief This function loops t + t_increment until it reaches the target.
      *
-     * @param x value x
-     * @param z value z
      * @param target_time time to reach
      */
-    void objective_loop(float x, float y, float z, double target_time);
-
-    /**
-     * @brief This function loops t + t_increment N times and
-     *  calculates y and z in stationary mode.
-     *
-     * @param x value x
-     * @param iterations the N times
-     */
-    void iterations_loop_stationary_yz(float x, int iterations);
-
-    /**
-     * @brief This function loops t + t_increment N times and
-     *  calculates y and z in stationary mode.
-     *
-     * @param x value x
-     * @param y value y
-     * @param iterations the N times
-     */
-    void iterations_loop_stationary_z(float x, float y, int iterations);
-
-    /**
-     * @brief This function loops t + t_increment N times and
-     *  calculates y in stationary mode.
-     *
-     * @param x value x
-     * @param z value z
-     * @param iterations the N times
-     */
-    void iterations_loop_stationary_y(float x, float z, int iterations);
+    void objective_loop(double target_time);
 
     /**
      * @brief This function loops t + t_increment N times.
      *
-     * @param x value x
-     * @param z value z
      * @param iterations the N times
      */
-    void iterations_loop(float x, float y, float z, int iterations);
+    void iterations_loop(int iterations);
 
 private:
     /**
@@ -166,10 +167,16 @@ private:
     void calculate_stationary_y();
 
     /**
-     * @brief This function saves x,y,z and the actual time.
+     * @brief This function allocates an array.
      *
      */
-    void save();
+    void allocate_array(double start_time, double target_time);
+
+    /**
+     * @brief This function allocates an array.
+     *
+     */
+    void allocate_array(int iterations);
 };
 
 #endif /* HINDMARSHROSE_H */

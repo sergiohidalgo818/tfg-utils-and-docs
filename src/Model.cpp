@@ -6,32 +6,25 @@ Model::Model(double time_increment, const char *filename)
     this->time = 0;
     this->outfile.open(filename);
     this->perpetual = true;
-
-    this->data = new std::vector<std::vector<float>>();
 }
 
-Model::Model(double time_increment, const char *filename, float start_time)
+Model::Model(double time_increment, const char *filename, double start_time)
 {
     this->time_increment = time_increment;
     this->time = start_time;
     this->outfile.open(filename);
     this->perpetual = true;
-
-    this->data = new std::vector<std::vector<float>>();
 }
 
-
-void Model::write_vector()
+void Model::write_data()
 {
-    //TO-DO eliminate vector
-
-    for (std::vector<std::vector<float>>::iterator data_iterator = this->data->begin(); data_iterator != this->data->end(); ++data_iterator)
+    for (int i = 0; i < this->data_rows; i++)
     {
-        for (std::vector<float>::iterator value_iterator = data_iterator->begin(); value_iterator != data_iterator->end(); ++value_iterator)
+        for (int j = 0; j < this->data_cols; j++)
         {
-            this->outfile << *value_iterator;
+            this->outfile << this->data[i][j];
 
-            if (value_iterator + 1 != data_iterator->end())
+            if (j + 1 != this->data_cols)
             {
                 this->outfile << ",";
             }
@@ -44,7 +37,11 @@ void Model::free()
 {
     this->outfile.close();
 
-    this->data->clear();
+    for (int i = 0; i < this->data_rows; i++)
+    {
+        delete (this->data[i]);
+    }
+    delete (this->data);
 
     delete (this);
 }
