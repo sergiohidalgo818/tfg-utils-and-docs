@@ -1,3 +1,13 @@
+/**
+ * @file main_cpp.cpp
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Main file for the execution of the Hindmarsh-Rose model in c++
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "../include/HindmarshRose.h"
 
 #include <chrono>

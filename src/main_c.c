@@ -1,7 +1,25 @@
+/**
+ * @file main_c.c
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Main file for the execution of the Hindmarsh-Rose model in c
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "../include/hindmarsh_rose.h"
 #include <stdio.h>
 #include <time.h>
 
+/**
+ * @brief This function writes the content of an array in a file.
+ *
+ * @param filename the file name
+ * @param values values to write
+ * @param lines number of lines
+ *
+ */
 void write_on_file(const char *filename, double **values, long lines)
 {
     FILE *fptr;

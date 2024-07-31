@@ -1,0 +1,28 @@
+\hypertarget{HindmarshRose_8cpp}{}\doxysection{/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/src/\+Hindmarsh\+Rose.cpp File Reference}
+\label{HindmarshRose_8cpp}\index{/mnt/c/Users/sergi/Desktop/cositas/uni/TFG/src/HindmarshRose.cpp@{/mnt/c/Users/sergi/Desktop/cositas/uni/TFG/src/HindmarshRose.cpp}}
+
+
+Implementation file in c++ for the class of Hindmarsh-\/\+Rose model class.  
+
+
+{\ttfamily \#include \char`\"{}../include/\+Hindmarsh\+Rose.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+Include dependency graph for Hindmarsh\+Rose.\+cpp\+:
+% FIG 0
+
+
+\doxysubsection{Detailed Description}
+Implementation file in c++ for the class of Hindmarsh-\/\+Rose model class. 
+
+\begin{DoxyAuthor}{Author}
+Sergio Hidalgo (\href{mailto:sergio.hidalgo@estudiante.uam.es}{\texttt{ sergio.\+hidalgo@estudiante.\+uam.\+es}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/07-\/31
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}

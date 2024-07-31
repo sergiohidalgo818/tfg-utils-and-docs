@@ -1,3 +1,14 @@
+/**
+ * @file hindmarsh_rose_cppinc.cpp
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Implementation file in c of the functions for Hindmarsh-Rose model
+ * but compiled in c
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "../include/hindmarsh_rose.h"
 
 #include <stdlib.h>

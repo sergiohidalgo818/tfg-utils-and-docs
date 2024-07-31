@@ -1,11 +1,21 @@
+/**
+ * @file HindmarshRose.h
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Definition file for the Hindmarsh-Rose model class
+ * @version 0.1
+ * @date 2024-07-31
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #ifndef HINDMARSHROSE_H
 #define HINDMARSHROSE_H
 
 #include "Model.h"
 
-
 /**
- * @class This class implements the model of hindmarsh-Rose.
+ * @class HindmarshRose
+ * @brief This function initialices the model.
  *
  * @param x value x
  * @param y the value y
@@ -34,7 +44,6 @@ public:
     float S;
     float m;
     HindmarshRose::StationaryMode mode;
-
 
 public:
     /**

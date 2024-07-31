@@ -1,0 +1,180 @@
+\hypertarget{hindmarsh__rose_8c}{}\doxysection{/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/src/hindmarsh\+\_\+rose.c File Reference}
+\label{hindmarsh__rose_8c}\index{/mnt/c/Users/sergi/Desktop/cositas/uni/TFG/src/hindmarsh\_rose.c@{/mnt/c/Users/sergi/Desktop/cositas/uni/TFG/src/hindmarsh\_rose.c}}
+
+
+Implementation file in c of the functions for Hindmarsh-\/\+Rose model.  
+
+
+{\ttfamily \#include \char`\"{}../include/hindmarsh\+\_\+rose.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for hindmarsh\+\_\+rose.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hindmarsh__rose_8c_a9a3051dbccba2e86b2cc8a9199f4dd2e}\label{hindmarsh__rose_8c_a9a3051dbccba2e86b2cc8a9199f4dd2e}} 
+double $\ast$$\ast$ {\bfseries allocate\+\_\+array} (double start\+\_\+time, double time\+\_\+increment, double target\+\_\+time, long $\ast$n\+\_\+lines)
+\item 
+void \mbox{\hyperlink{hindmarsh__rose_8c_a432669759d82c929c8689344b3a7a103}{free\+\_\+array}} (double $\ast$$\ast$array, long n\+\_\+lines)
+\begin{DoxyCompactList}\small\item\em This function frees the memory of the array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hindmarsh__rose_8c_a76437a82e2cec0fd568fcfbe442c31b5}\label{hindmarsh__rose_8c_a76437a82e2cec0fd568fcfbe442c31b5}} 
+double {\bfseries calculate\+\_\+stationary\+\_\+y} (double x, double time\+\_\+increment)
+\item 
+\mbox{\Hypertarget{hindmarsh__rose_8c_a2c01d15be483c90d197c01da1ed2cb04}\label{hindmarsh__rose_8c_a2c01d15be483c90d197c01da1ed2cb04}} 
+double {\bfseries calculate\+\_\+stationary\+\_\+z} (double x, double time\+\_\+increment, double m, double S)
+\item 
+\mbox{\Hypertarget{hindmarsh__rose_8c_a297479a07334287da71e12c78d91a38e}\label{hindmarsh__rose_8c_a297479a07334287da71e12c78d91a38e}} 
+void {\bfseries calculate} (double $\ast$x\+\_\+ptr, double $\ast$y\+\_\+ptr, double $\ast$z\+\_\+ptr, double time\+\_\+increment, double $\ast$time, double e, double m, double S)
+\item 
+double $\ast$$\ast$ \mbox{\hyperlink{hindmarsh__rose_8c_adab74ed734f73475d20c3d6463c85bad}{hindmarsh\+\_\+rose\+\_\+stationary\+\_\+y\+\_\+or\+\_\+z}} (double x, double yz, double start\+\_\+time, double time\+\_\+increment, double target\+\_\+time, double $\ast$time, double e, double m, double S, long $\ast$n\+\_\+lines, \mbox{\hyperlink{hindmarsh__rose_8h_aa69af28d35721fbcaed80edd5c99b1e2}{Stationary\+Mode}} mode)
+\begin{DoxyCompactList}\small\item\em This function simulates the hindmarsh rose model, y is stationary. \end{DoxyCompactList}\item 
+double $\ast$$\ast$ \mbox{\hyperlink{hindmarsh__rose_8c_a2e65817d445be09bf67fa3d3753c70f1}{hindmarsh\+\_\+rose\+\_\+stationary\+\_\+yz}} (double x, double start\+\_\+time, double time\+\_\+increment, double target\+\_\+time, double $\ast$time, double e, double m, double S, long $\ast$n\+\_\+lines)
+\begin{DoxyCompactList}\small\item\em This function simulates the hindmarsh rose model, z and y are stationary. \end{DoxyCompactList}\item 
+double $\ast$$\ast$ \mbox{\hyperlink{hindmarsh__rose_8c_afea71dad19ea1ebeea32c26d1abb58b8}{hindmarsh\+\_\+rose}} (double x, double y, double z, double start\+\_\+time, double time\+\_\+increment, double target\+\_\+time, double $\ast$time, double e, double m, double S, long $\ast$n\+\_\+lines)
+\begin{DoxyCompactList}\small\item\em This function simulates the hindmarsh rose model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation file in c of the functions for Hindmarsh-\/\+Rose model. 
+
+\begin{DoxyAuthor}{Author}
+Sergio Hidalgo (\href{mailto:sergio.hidalgo@estudiante.uam.es}{\texttt{ sergio.\+hidalgo@estudiante.\+uam.\+es}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/07-\/31
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hindmarsh__rose_8c_a432669759d82c929c8689344b3a7a103}\label{hindmarsh__rose_8c_a432669759d82c929c8689344b3a7a103}} 
+\index{hindmarsh\_rose.c@{hindmarsh\_rose.c}!free\_array@{free\_array}}
+\index{free\_array@{free\_array}!hindmarsh\_rose.c@{hindmarsh\_rose.c}}
+\doxysubsubsection{\texorpdfstring{free\_array()}{free\_array()}}
+{\footnotesize\ttfamily void free\+\_\+array (\begin{DoxyParamCaption}\item[{double $\ast$$\ast$}]{array,  }\item[{long}]{n\+\_\+lines }\end{DoxyParamCaption})}
+
+
+
+This function frees the memory of the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & the array \\
+\hline
+{\em n\+\_\+lines} & the number of lines \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{hindmarsh__rose_8c_afea71dad19ea1ebeea32c26d1abb58b8}\label{hindmarsh__rose_8c_afea71dad19ea1ebeea32c26d1abb58b8}} 
+\index{hindmarsh\_rose.c@{hindmarsh\_rose.c}!hindmarsh\_rose@{hindmarsh\_rose}}
+\index{hindmarsh\_rose@{hindmarsh\_rose}!hindmarsh\_rose.c@{hindmarsh\_rose.c}}
+\doxysubsubsection{\texorpdfstring{hindmarsh\_rose()}{hindmarsh\_rose()}}
+{\footnotesize\ttfamily double$\ast$$\ast$ hindmarsh\+\_\+rose (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{z,  }\item[{double}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{double}]{target\+\_\+time,  }\item[{double $\ast$}]{time,  }\item[{double}]{e,  }\item[{double}]{m,  }\item[{double}]{S,  }\item[{long $\ast$}]{n\+\_\+lines }\end{DoxyParamCaption})}
+
+
+
+This function simulates the hindmarsh rose model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & value x \\
+\hline
+{\em y} & the value y \\
+\hline
+{\em z} & the value z \\
+\hline
+{\em start\+\_\+time} & the time when the model starts \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em target\+\_\+time} & time when it stops \\
+\hline
+{\em time} & pointer to keep last time \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+{\em n\+\_\+lines} & number of linesc\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the array of values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hindmarsh__rose_8c_adab74ed734f73475d20c3d6463c85bad}\label{hindmarsh__rose_8c_adab74ed734f73475d20c3d6463c85bad}} 
+\index{hindmarsh\_rose.c@{hindmarsh\_rose.c}!hindmarsh\_rose\_stationary\_y\_or\_z@{hindmarsh\_rose\_stationary\_y\_or\_z}}
+\index{hindmarsh\_rose\_stationary\_y\_or\_z@{hindmarsh\_rose\_stationary\_y\_or\_z}!hindmarsh\_rose.c@{hindmarsh\_rose.c}}
+\doxysubsubsection{\texorpdfstring{hindmarsh\_rose\_stationary\_y\_or\_z()}{hindmarsh\_rose\_stationary\_y\_or\_z()}}
+{\footnotesize\ttfamily double$\ast$$\ast$ hindmarsh\+\_\+rose\+\_\+stationary\+\_\+y\+\_\+or\+\_\+z (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{yz,  }\item[{double}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{double}]{target\+\_\+time,  }\item[{double $\ast$}]{time,  }\item[{double}]{e,  }\item[{double}]{m,  }\item[{double}]{S,  }\item[{long $\ast$}]{n\+\_\+lines,  }\item[{\mbox{\hyperlink{hindmarsh__rose_8h_aa69af28d35721fbcaed80edd5c99b1e2}{Stationary\+Mode}}}]{mode }\end{DoxyParamCaption})}
+
+
+
+This function simulates the hindmarsh rose model, y is stationary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & value x \\
+\hline
+{\em yz} & the value of z or y \\
+\hline
+{\em start\+\_\+time} & the time when the model starts \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em target\+\_\+time} & time when it stops \\
+\hline
+{\em time} & pointer to keep last time \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+{\em n\+\_\+lines} & number of linesc\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the array of values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hindmarsh__rose_8c_a2e65817d445be09bf67fa3d3753c70f1}\label{hindmarsh__rose_8c_a2e65817d445be09bf67fa3d3753c70f1}} 
+\index{hindmarsh\_rose.c@{hindmarsh\_rose.c}!hindmarsh\_rose\_stationary\_yz@{hindmarsh\_rose\_stationary\_yz}}
+\index{hindmarsh\_rose\_stationary\_yz@{hindmarsh\_rose\_stationary\_yz}!hindmarsh\_rose.c@{hindmarsh\_rose.c}}
+\doxysubsubsection{\texorpdfstring{hindmarsh\_rose\_stationary\_yz()}{hindmarsh\_rose\_stationary\_yz()}}
+{\footnotesize\ttfamily double$\ast$$\ast$ hindmarsh\+\_\+rose\+\_\+stationary\+\_\+yz (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{double}]{target\+\_\+time,  }\item[{double $\ast$}]{time,  }\item[{double}]{e,  }\item[{double}]{m,  }\item[{double}]{S,  }\item[{long $\ast$}]{n\+\_\+lines }\end{DoxyParamCaption})}
+
+
+
+This function simulates the hindmarsh rose model, z and y are stationary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & value x \\
+\hline
+{\em start\+\_\+time} & the t e when the model starts \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em target\+\_\+time} & time when it stops \\
+\hline
+{\em time} & pointer to keep last time \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+{\em n\+\_\+lines} & number of linesc\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the array of values. 
+\end{DoxyReturn}

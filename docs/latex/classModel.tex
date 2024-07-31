@@ -1,0 +1,125 @@
+\hypertarget{classModel}{}\doxysection{Model Class Reference}
+\label{classModel}\index{Model@{Model}}
+
+
+This class implements the base class model.  
+
+
+
+
+{\ttfamily \#include $<$Model.\+h$>$}
+
+
+
+Inheritance diagram for Model\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classModel_a9895a9723f686166fea19f8faaef61a1}{Model}} (double time\+\_\+increment, const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classModel_a31618c0b7c43b205a42299e28fa0ee91}{Model}} (double time\+\_\+increment, const char $\ast$filename, double start\+\_\+time)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classModel_aa0c0f9208dda7745203f80f680d7315e}\label{classModel_aa0c0f9208dda7745203f80f680d7315e}} 
+void \mbox{\hyperlink{classModel_aa0c0f9208dda7745203f80f680d7315e}{write\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em This function writes the data on file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classModel_a0bf836020e4af9f5814dcb7c7f60ba77}\label{classModel_a0bf836020e4af9f5814dcb7c7f60ba77}} 
+void \mbox{\hyperlink{classModel_a0bf836020e4af9f5814dcb7c7f60ba77}{free}} ()
+\begin{DoxyCompactList}\small\item\em This function frees the data the data on file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classModel_a1a8d0f7b41708f4b5b1c53430a180b53}\label{classModel_a1a8d0f7b41708f4b5b1c53430a180b53}} 
+int {\bfseries data\+\_\+rows}
+\item 
+\mbox{\Hypertarget{classModel_a23708173c3d7cd812d48c91e17686147}\label{classModel_a23708173c3d7cd812d48c91e17686147}} 
+int {\bfseries data\+\_\+cols}
+\item 
+\mbox{\Hypertarget{classModel_ac08e6be5375c12b4f09dfd3e88552e46}\label{classModel_ac08e6be5375c12b4f09dfd3e88552e46}} 
+double {\bfseries time}
+\item 
+\mbox{\Hypertarget{classModel_a0b50cd90833e3b1fbc8680569a1e369a}\label{classModel_a0b50cd90833e3b1fbc8680569a1e369a}} 
+double {\bfseries time\+\_\+increment}
+\item 
+\mbox{\Hypertarget{classModel_a629f8404fda457d7d0dee5a366213e53}\label{classModel_a629f8404fda457d7d0dee5a366213e53}} 
+std\+::ofstream {\bfseries outfile}
+\item 
+\mbox{\Hypertarget{classModel_a436d1947dd33e75a9b015c67e2af06a2}\label{classModel_a436d1947dd33e75a9b015c67e2af06a2}} 
+float $\ast$$\ast$ {\bfseries data}
+\item 
+\mbox{\Hypertarget{classModel_a43d67735f6c22e61937c540e2689bb02}\label{classModel_a43d67735f6c22e61937c540e2689bb02}} 
+bool {\bfseries perpetual}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class implements the base class model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+rows} & number of data rows \\
+\hline
+{\em data\+\_\+cols} & number of data colummns \\
+\hline
+{\em time} & the value of the time \\
+\hline
+{\em time\+\_\+increment} & the value of the time increment \\
+\hline
+{\em outfile} & outfile to print the data \\
+\hline
+{\em data} & values of data \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classModel_a9895a9723f686166fea19f8faaef61a1}\label{classModel_a9895a9723f686166fea19f8faaef61a1}} 
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Model\+::\+Model (\begin{DoxyParamCaption}\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classModel_a31618c0b7c43b205a42299e28fa0ee91}\label{classModel_a31618c0b7c43b205a42299e28fa0ee91}} 
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Model\+::\+Model (\begin{DoxyParamCaption}\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{double}]{start\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em start\+\_\+time} & time of starting\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/include/\mbox{\hyperlink{Model_8h}{Model.\+h}}\item 
+/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/src/\mbox{\hyperlink{Model_8cpp}{Model.\+cpp}}\end{DoxyCompactItemize}

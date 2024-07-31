@@ -1,3 +1,13 @@
+/**
+ * @file Model.h
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Definition file for the model class
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -6,7 +16,8 @@
 
 
 /**
- * @class This class implements the base class model.
+ * @class Model
+ * @brief This class implements the base class model.
  *
  * @param data_rows number of data rows
  * @param data_cols number of data colummns

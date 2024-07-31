@@ -1,3 +1,13 @@
+/**
+ * @file HindmarshRose.cpp
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Implementation file in c++ for the class of Hindmarsh-Rose model class
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "../include/HindmarshRose.h"
 
 #include <cmath>

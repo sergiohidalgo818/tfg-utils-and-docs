@@ -1,8 +1,23 @@
+/**
+ * @file hindmarsh_rose.h
+ * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
+ * @brief Definition file for the c functions
+ * @version 0.1
+ * @date 2024-07-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef HINDMARSH_ROSE_H
 #define HINDMARSH_ROSE_H
 
 #include "constants.h"
 
+
+/**
+ * @enum StationaryMode
+ * @brief enum for the stationary variable.
+ */
 typedef enum
 {
   Y_STATIONARY = 1,

@@ -1,0 +1,331 @@
+\hypertarget{classHindmarshRose}{}\doxysection{Hindmarsh\+Rose Class Reference}
+\label{classHindmarshRose}\index{HindmarshRose@{HindmarshRose}}
+
+
+This function initialices the model.  
+
+
+
+
+{\ttfamily \#include $<$Hindmarsh\+Rose.\+h$>$}
+
+
+
+Inheritance diagram for Hindmarsh\+Rose\+:
+% FIG 0
+
+
+Collaboration diagram for Hindmarsh\+Rose\+:
+% FIG 1
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_acd3fe0a81a13906d48b9f869675284bb}\label{classHindmarshRose_acd3fe0a81a13906d48b9f869675284bb}} 
+enum {\bfseries Stationary\+Mode} \{ {\bfseries Z\+\_\+\+Stationary}
+, {\bfseries Y\+\_\+\+Stationary}
+, {\bfseries ZY\+\_\+\+Stationary}
+, {\bfseries None\+\_\+\+Stationary}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHindmarshRose_af160989801700a553e895514e7316aa1}{Hindmarsh\+Rose}} (double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float e, float m, float S)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classHindmarshRose_a30f15ff7ac76e335dacf81f7abe1f170}{Hindmarsh\+Rose}} (double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float initial\+\_\+y, float initial\+\_\+z, float e, float m, float S)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classHindmarshRose_a88f235f2a1087a4e06dafa5a8c897f59}{Hindmarsh\+Rose}} (double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float initial\+\_\+yz, float e, float m, float S, Stationary\+Mode mode)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classHindmarshRose_aa428904559a4a1bca9b2d7c363f71295}{Hindmarsh\+Rose}} (float start\+\_\+time, double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float e, float m, float S)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classHindmarshRose_acbb5b74423e0a94150cf267fd32c924a}{Hindmarsh\+Rose}} (float start\+\_\+time, double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float initial\+\_\+y, float initial\+\_\+z, float e, float m, float S)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classHindmarshRose_a02e94dbec45ac00274da0b949e407ae5}{Hindmarsh\+Rose}} (float start\+\_\+time, double time\+\_\+increment, const char $\ast$filename, float initial\+\_\+x, float initial\+\_\+yz, float e, float m, float S, Stationary\+Mode mode)
+\begin{DoxyCompactList}\small\item\em This function initialices the model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHindmarshRose_a9035da1b40adda3777bc43921152ff7f}\label{classHindmarshRose_a9035da1b40adda3777bc43921152ff7f}} 
+void \mbox{\hyperlink{classHindmarshRose_a9035da1b40adda3777bc43921152ff7f}{calculate}} ()
+\begin{DoxyCompactList}\small\item\em This function calculates t + t\+\_\+increment on the model. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHindmarshRose_ad052504921d83409b80184515148afaa}{objective\+\_\+loop}} (double target\+\_\+time)
+\begin{DoxyCompactList}\small\item\em This function loops t + t\+\_\+increment until it reaches the target. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHindmarshRose_a251e4ab664cf26702547b8cfe563b8b5}{iterations\+\_\+loop}} (int iterations)
+\begin{DoxyCompactList}\small\item\em This function loops t + t\+\_\+increment N times. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a8b523de2601199353ce56f4fde9516d5}\label{classHindmarshRose_a8b523de2601199353ce56f4fde9516d5}} 
+float {\bfseries x}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a5fa98d890f6e9ac48e655710d170786a}\label{classHindmarshRose_a5fa98d890f6e9ac48e655710d170786a}} 
+float {\bfseries y}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_ae0398049542eeb9681837cf33865e5e1}\label{classHindmarshRose_ae0398049542eeb9681837cf33865e5e1}} 
+float {\bfseries z}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a6bf6c7b78cd5fb15207d431d2435f29a}\label{classHindmarshRose_a6bf6c7b78cd5fb15207d431d2435f29a}} 
+float {\bfseries e}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a17da6d6fb7a6af92f24ab04b1058ceeb}\label{classHindmarshRose_a17da6d6fb7a6af92f24ab04b1058ceeb}} 
+float {\bfseries S}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a1983da8cb50bd4a0710e38e10bbfd355}\label{classHindmarshRose_a1983da8cb50bd4a0710e38e10bbfd355}} 
+float {\bfseries m}
+\item 
+\mbox{\Hypertarget{classHindmarshRose_a1081a68ebaa3b4fd37ada19a80c2edb5}\label{classHindmarshRose_a1081a68ebaa3b4fd37ada19a80c2edb5}} 
+Hindmarsh\+Rose\+::\+Stationary\+Mode {\bfseries mode}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & value x \\
+\hline
+{\em y} & the value y \\
+\hline
+{\em z} & the value z \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHindmarshRose_af160989801700a553e895514e7316aa1}\label{classHindmarshRose_af160989801700a553e895514e7316aa1}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHindmarshRose_a30f15ff7ac76e335dacf81f7abe1f170}\label{classHindmarshRose_a30f15ff7ac76e335dacf81f7abe1f170}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{initial\+\_\+y,  }\item[{float}]{initial\+\_\+z,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em initial\+\_\+y} & value of intial y \\
+\hline
+{\em initial\+\_\+z} & value of intial z \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHindmarshRose_a88f235f2a1087a4e06dafa5a8c897f59}\label{classHindmarshRose_a88f235f2a1087a4e06dafa5a8c897f59}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{initial\+\_\+yz,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S,  }\item[{Stationary\+Mode}]{mode }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em initial\+\_\+yz} & value of initial y or value of initial z (depends on the mode) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+{\em mode} & mode of the stationary values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHindmarshRose_aa428904559a4a1bca9b2d7c363f71295}\label{classHindmarshRose_aa428904559a4a1bca9b2d7c363f71295}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{float}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+time} & time of starting \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHindmarshRose_acbb5b74423e0a94150cf267fd32c924a}\label{classHindmarshRose_acbb5b74423e0a94150cf267fd32c924a}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{float}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{initial\+\_\+y,  }\item[{float}]{initial\+\_\+z,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+time} & time of starting \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em initial\+\_\+y} & value of intial y \\
+\hline
+{\em initial\+\_\+z} & value of intial z \\
+\hline
+{\em y} & value y \\
+\hline
+{\em z} & value z \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHindmarshRose_a02e94dbec45ac00274da0b949e407ae5}\label{classHindmarshRose_a02e94dbec45ac00274da0b949e407ae5}} 
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\index{HindmarshRose@{HindmarshRose}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{HindmarshRose()}{HindmarshRose()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily Hindmarsh\+Rose\+::\+Hindmarsh\+Rose (\begin{DoxyParamCaption}\item[{float}]{start\+\_\+time,  }\item[{double}]{time\+\_\+increment,  }\item[{const char $\ast$}]{filename,  }\item[{float}]{initial\+\_\+x,  }\item[{float}]{initial\+\_\+yz,  }\item[{float}]{e,  }\item[{float}]{m,  }\item[{float}]{S,  }\item[{Stationary\+Mode}]{mode }\end{DoxyParamCaption})}
+
+
+
+This function initialices the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+time} & time of starting \\
+\hline
+{\em time\+\_\+increment} & incremet of the time (time step) \\
+\hline
+{\em filename} & name of the file to write \\
+\hline
+{\em initial\+\_\+x} & value of intial x \\
+\hline
+{\em initial\+\_\+yz} & value of initial y or value of initial z (depends on the mode) \\
+\hline
+{\em m} & value of the m constant \\
+\hline
+{\em e} & value of the e constant ($>$ 3.\+0 is chaotic) \\
+\hline
+{\em S} & value of the S constant \\
+\hline
+{\em mode} & mode of the stationary values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the model initialized. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHindmarshRose_a251e4ab664cf26702547b8cfe563b8b5}\label{classHindmarshRose_a251e4ab664cf26702547b8cfe563b8b5}} 
+\index{HindmarshRose@{HindmarshRose}!iterations\_loop@{iterations\_loop}}
+\index{iterations\_loop@{iterations\_loop}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{iterations\_loop()}{iterations\_loop()}}
+{\footnotesize\ttfamily void Hindmarsh\+Rose\+::iterations\+\_\+loop (\begin{DoxyParamCaption}\item[{int}]{iterations }\end{DoxyParamCaption})}
+
+
+
+This function loops t + t\+\_\+increment N times. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterations} & the N times \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHindmarshRose_ad052504921d83409b80184515148afaa}\label{classHindmarshRose_ad052504921d83409b80184515148afaa}} 
+\index{HindmarshRose@{HindmarshRose}!objective\_loop@{objective\_loop}}
+\index{objective\_loop@{objective\_loop}!HindmarshRose@{HindmarshRose}}
+\doxysubsubsection{\texorpdfstring{objective\_loop()}{objective\_loop()}}
+{\footnotesize\ttfamily void Hindmarsh\+Rose\+::objective\+\_\+loop (\begin{DoxyParamCaption}\item[{double}]{target\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+This function loops t + t\+\_\+increment until it reaches the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+time} & time to reach \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/include/Hindmarsh\+Rose.\+h\item 
+/mnt/c/\+Users/sergi/\+Desktop/cositas/uni/\+TFG/src/Hindmarsh\+Rose.\+cpp\end{DoxyCompactItemize}

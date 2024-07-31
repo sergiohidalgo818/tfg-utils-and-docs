@@ -1,0 +1,15 @@
+digraph "/mnt/c/Users/sergi/Desktop/cositas/uni/TFG/include/hindmarsh_rose.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/mnt/c/Users/sergi\l/Desktop/cositas/uni\l/TFG/include/hindmarsh\l_rose.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Definition file for the c functions."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="/mnt/c/Users/sergi\l/Desktop/cositas/uni\l/TFG/src/hindmarsh_rose.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hindmarsh__rose_8c.html",tooltip="Implementation file in c of the functions for Hindmarsh-Rose model."];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="/mnt/c/Users/sergi\l/Desktop/cositas/uni\l/TFG/src/hindmarsh_rose\l_cppinc.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hindmarsh__rose__cppinc_8cpp.html",tooltip="Implementation file in c of the functions for Hindmarsh-Rose model but compiled in c."];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="/mnt/c/Users/sergi\l/Desktop/cositas/uni\l/TFG/src/main_c.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main__c_8c.html",tooltip="Main file for the execution of the Hindmarsh-Rose model in c."];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="/mnt/c/Users/sergi\l/Desktop/cositas/uni\l/TFG/src/main_cppinc.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main__cppinc_8cpp.html",tooltip="Main file for the execution of the Hindmarsh-Rose model in c but compiled in c++."];
+}
