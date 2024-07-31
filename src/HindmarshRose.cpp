@@ -1,5 +1,7 @@
 #include "../include/HindmarshRose.h"
 
+#include <cmath>
+
 HindmarshRose::HindmarshRose(double time_increment, const char *filename, float initial_x, float e, float m, float S) : Model(time_increment, filename)
 {
     this->x = initial_x;
@@ -9,7 +11,6 @@ HindmarshRose::HindmarshRose(double time_increment, const char *filename, float 
     this->S = S;
 
     this->calculate_stationary_y();
-
     this->calculate_stationary_z();
 
     this->outfile << "x,y,z,time\n";
@@ -25,8 +26,6 @@ HindmarshRose::HindmarshRose(double time_increment, const char *filename, float 
     this->m = m;
     this->S = S;
 
-    this->calculate_stationary_y();
-    this->calculate_stationary_z();
 
     this->outfile << "x,y,z,time\n";
 }
@@ -83,8 +82,6 @@ HindmarshRose::HindmarshRose(float start_time, double time_increment, const char
     this->m = m;
     this->S = S;
 
-    this->calculate_stationary_y();
-    this->calculate_stationary_z();
 
     this->outfile << "x,y,z,time\n";
 }
@@ -139,7 +136,8 @@ void HindmarshRose::calculate()
     this->y = aux_y;
     this->z = aux_z;
 
-    time = time + time_increment;
+    this->time = time + time_increment;
+
 }
 
 void HindmarshRose::objective_loop(double target_time)
@@ -149,15 +147,15 @@ void HindmarshRose::objective_loop(double target_time)
 
     this->allocate_array(this->time, target_time);
 
-    while (this->time < target_time)
+
+    while ((target_time-time) > DECIMAL_PRECISION)
     {
 
         this->data[counter][0] = x;
         this->data[counter][1] = y;
         this->data[counter][2] = z;
-        this->data[counter][3] = time;
+        this->data[counter][3] = (float)time;
         this->calculate();
-
         counter++;
     }
 }
@@ -177,7 +175,7 @@ void HindmarshRose::iterations_loop(int iterations)
         this->data[iterations][0] = x;
         this->data[iterations][1] = y;
         this->data[iterations][2] = z;
-        this->data[iterations][3] = time;
+        this->data[iterations][3] = (float)time;
         this->calculate();
     }
 }
@@ -187,15 +185,15 @@ void HindmarshRose::allocate_array(double start_time, double target_time)
 
     int i = 0;
     double time = target_time - this->time;
-    this->data_rows = (long)((time / time_increment) + 1);
+    this->data_rows = (long)((time / time_increment) );
 
-    this->data_cols = ElemsInModel;
+    this->data_cols = ELEMENTS_IN_MODEL;
 
-    this->data = new double *[this->data_rows];
+    this->data = new float *[this->data_rows];
 
     for (i = 0; i < this->data_rows; i++)
     {
-        this->data[i] = new double[this->data_cols];
+        this->data[i] = new float[this->data_cols];
     }
 }
 
@@ -203,12 +201,12 @@ void HindmarshRose::allocate_array(int iterations)
 {
     int i = 0;
     this->data_rows = iterations;
-    this->data_cols = ElemsInModel;
+    this->data_cols = ELEMENTS_IN_MODEL;
 
-    this->data = new double *[this->data_rows];
+    this->data = new float *[this->data_rows];
 
     for (i = 0; i < this->data_rows; i++)
     {
-        this->data[i] = new double[this->data_cols];
+        this->data[i] = new float[this->data_cols];
     }
 }

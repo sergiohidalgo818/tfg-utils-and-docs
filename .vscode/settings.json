@@ -57,7 +57,9 @@
         "set": "cpp",
         "hindmarsh_rose.h": "c",
         "stdio.h": "c",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "stdlib.h": "c",
+        "constants.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

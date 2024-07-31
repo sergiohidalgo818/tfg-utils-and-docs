@@ -22,21 +22,25 @@ int main()
 
     double **regular_values, **chaotic_values, **regular_values_continue, **chaotic_values_continue;
     double start, end_function, end_all_functions, end_writing_operations, end;
+    double regular_time, chaotic_time, regular_time_continue, chaotic_time_continue;
     long regular_lines, chaotic_lines, regular_lines_continue, chaotic_lines_continue;
     int i = 0;
+    const char *filename = "./measures/timing_HR/speed_c.txt";
+
     clock_t clock(void);
+    FILE *fptr;
 
     start = (double)clock();
     start = start / CLOCKS_PER_SEC;
-    regular_values = hindmarsh_rose_stationary_yz(-1.3, 0, 0.001, 5000.0, 3.0, 0.0021, 4.0, &regular_lines);
+    regular_values = hindmarsh_rose_stationary_yz(-1.3, 0, 0.001, 5000.0, &regular_time, 3.0, 0.0021, 4.0, &regular_lines);
     end_function = (double)clock();
     end_function = end_function / CLOCKS_PER_SEC;
 
-    chaotic_values = hindmarsh_rose_stationary_yz(-1.3, 0, 0.001, 5000.0, 3.281, 0.0021, 4.0, &chaotic_lines);
+    chaotic_values = hindmarsh_rose_stationary_yz(-1.3, 0, 0.001, 5000.0, &chaotic_time, 3.281, 0.0021, 4.0, &chaotic_lines);
 
-    regular_values_continue = hindmarsh_rose(regular_values[regular_lines - 1][0], regular_values[regular_lines - 1][1], regular_values[regular_lines - 1][2], (regular_values[regular_lines - 1][3]), 0.001, 10000.0, 3.0, 0.0021, 4.0, &regular_lines_continue);
+    regular_values_continue = hindmarsh_rose(regular_values[regular_lines - 1][0], regular_values[regular_lines - 1][1], regular_values[regular_lines - 1][2], regular_time, 0.001, 10000.0, &regular_time_continue, 3.0, 0.0021, 4.0, &regular_lines_continue);
 
-    chaotic_values_continue = hindmarsh_rose(chaotic_values[chaotic_lines - 1][0], chaotic_values[chaotic_lines - 1][1], chaotic_values[chaotic_lines - 1][2], (chaotic_values[chaotic_lines - 1][3]), 0.001, 10000.0, 3.281, 0.0021, 4.0, &chaotic_lines_continue);
+    chaotic_values_continue = hindmarsh_rose(chaotic_values[chaotic_lines - 1][0], chaotic_values[chaotic_lines - 1][1], chaotic_values[chaotic_lines - 1][2], chaotic_time, 0.001, 10000.0, &chaotic_time_continue, 3.281, 0.0021, 4.0, &chaotic_lines_continue);
 
     end_all_functions = (double)clock();
     end_all_functions = end_all_functions / CLOCKS_PER_SEC;
@@ -57,10 +61,17 @@ int main()
     end = (double)clock();
     end = end / CLOCKS_PER_SEC;
 
-    FILE *fptr;
+    if (!(fptr = fopen(filename, "r")))
+    {
+        fptr = fopen(filename, "w");
+        fprintf(fptr, "function_time,all_functions_time,writing_operations,program_after_writing,frees,total_program\n");
+    }
+    else
+    {
+        fclose(fptr);
+        fptr = fopen(filename, "a");
+    }
 
-    fptr = fopen("./measures/timing_HR/speed_c.txt", "w");
-    fprintf(fptr, "function_time,all_functions_time,writing_operations,program_after_writing,frees,total_program\n");
     fprintf(fptr, "%lf,%lf,%lf,%lf,%lf,%lf\n", end_function - start, end_all_functions - start, end_writing_operations - end_all_functions, end_writing_operations - start, end - end_writing_operations, end - start);
 
     fclose(fptr);

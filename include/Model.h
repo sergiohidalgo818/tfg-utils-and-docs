@@ -2,8 +2,8 @@
 #define MODEL_H
 
 #include <fstream>
+#include "constants.h"
 
-#define DECIMAL_PRECISION 7
 
 /**
  * @class This class implements the base class model.
@@ -26,7 +26,7 @@ public:
     double time;
     double time_increment;
     std::ofstream outfile;
-    double **data;
+    float **data;
     bool perpetual;
 
 public:

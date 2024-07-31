@@ -2,7 +2,8 @@
 #define HINDMARSHROSE_H
 
 #include "Model.h"
-#define ElemsInModel 4
+
+
 /**
  * @class This class implements the model of hindmarsh-Rose.
  *

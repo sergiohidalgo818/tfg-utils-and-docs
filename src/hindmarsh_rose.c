@@ -2,14 +2,18 @@
 
 #include <stdlib.h>
 
+#include <math.h>
+
 double **allocate_array(double start_time, double time_increment, double target_time, long *n_lines)
 {
     double **array;
     int i = 0;
     double time = target_time - start_time;
-    (*n_lines) = (long)(time / time_increment);
 
-    int n_cols = 4;
+    (*n_lines) = (long)(ceil(time / time_increment));
+
+
+    int n_cols = ELEMENTS_IN_MODEL;
 
     array = (double **)malloc((*n_lines) * sizeof(double *));
 
@@ -19,7 +23,7 @@ double **allocate_array(double start_time, double time_increment, double target_
     return array;
 }
 
-void free_array(double** array, long n_lines)
+void free_array(double **array, long n_lines)
 {
     int i = 0;
     for (i; i < n_lines; i++)
@@ -55,58 +59,48 @@ void calculate(double *x_ptr, double *y_ptr, double *z_ptr, double time_incremen
     (*y_ptr) = aux_y;
     (*z_ptr) = aux_z;
 
-
     (*time) = (*time) + time_increment;
 }
 
-double **hindmarsh_rose_stationary_z(double x, double y, double start_time, double time_increment, double target_time, double e, double m, double S, long *n_lines)
+double **hindmarsh_rose_stationary_y_or_z(double x, double yz, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines, StationaryMode mode)
 {
-    double time = start_time;
+    (*time) = start_time;
+    double z, y;
 
-    double z = calculate_stationary_z(x, time_increment, m, S);
+    if (mode == Y_STATIONARY)
+    {
+        y = calculate_stationary_y(x, time_increment);
+    }
+    else if (mode = Z_STATIONARY)
+    {
+        z = calculate_stationary_z(x, time_increment, m, S);
+    }
+    else
+    {
+        y = calculate_stationary_y(x, time_increment);
+        z = calculate_stationary_z(x, time_increment, m, S);
+    }
 
     double **array = allocate_array(start_time, time_increment, target_time, n_lines);
 
     int counter = 0;
 
-    while (time < target_time && counter < (*n_lines))
+    while ((target_time - (*time)) > DECIMAL_PRECISION)
     {
         array[counter][0] = x;
         array[counter][1] = y;
         array[counter][2] = z;
-        array[counter][3] = time;
-        calculate(&x, &y, &z, time_increment, &time, e, m, S);
+        array[counter][3] = (*time);
+        calculate(&x, &y, &z, time_increment, time, e, m, S);
         counter++;
     }
 
     return array;
 }
 
-double **hindmarsh_rose_stationary_y(double x, double z, double start_time, double time_increment, double target_time, double e, double m, double S, long *n_lines)
+double **hindmarsh_rose_stationary_yz(double x, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines)
 {
-    double time = start_time;
-    double y = calculate_stationary_y(x, time_increment);
-
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
-
-    int counter = 0;
-
-    while (time < target_time && counter < (*n_lines))
-    {
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = z;
-        array[counter][3] = time;
-        calculate(&x, &y, &z, time_increment, &time, e, m, S);
-        counter++;
-    }
-
-    return array;
-}
-
-double **hindmarsh_rose_stationary_yz(double x, double start_time, double time_increment, double target_time, double e, double m, double S, long *n_lines)
-{
-    double time = start_time;
+    (*time) = start_time;
 
     double y = calculate_stationary_y(x, time_increment);
     double z = calculate_stationary_z(x, time_increment, m, S);
@@ -115,35 +109,36 @@ double **hindmarsh_rose_stationary_yz(double x, double start_time, double time_i
 
     int counter = 0;
 
-    while (time < target_time && counter < (*n_lines) )
+    while ((target_time - (*time)) > DECIMAL_PRECISION )
     {
+
         array[counter][0] = x;
         array[counter][1] = y;
         array[counter][2] = z;
-        array[counter][3] = time;
-        calculate(&x, &y, &z, time_increment, &time, e, m, S);
+        array[counter][3] = (*time);
+        calculate(&x, &y, &z, time_increment, time, e, m, S);
         counter++;
     }
-
     return array;
 }
 
-double **hindmarsh_rose(double x, double y, double z, double start_time, double time_increment, double target_time, double e, double m, double S, long *n_lines)
+double **hindmarsh_rose(double x, double y, double z, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines)
 {
-    double time = start_time;
-
+    (*time) = start_time;
 
     double **array = allocate_array(start_time, time_increment, target_time, n_lines);
 
     int counter = 0;
 
-    while (time < target_time && counter < (*n_lines))
+    while ((target_time - (*time)) > DECIMAL_PRECISION )
     {
+
         array[counter][0] = x;
         array[counter][1] = y;
         array[counter][2] = z;
-        array[counter][3] = time;
-        calculate(&x, &y, &z, time_increment, &time, e, m, S);
+        array[counter][3] = (*time);
+        calculate(&x, &y, &z, time_increment, time, e, m, S);
+
         counter++;
     }
 

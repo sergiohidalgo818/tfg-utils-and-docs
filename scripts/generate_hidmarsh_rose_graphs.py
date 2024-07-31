@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import statistics
 
 def plot_model_data(filename:str):
     if not os.path.exists("graphs/HR/"):
@@ -43,7 +44,7 @@ def plot_speed_data(path):
         
         data = list()
         for data_frame in data_frames:
-            data.append(data_frame[col_name].values[0])
+            data.append(statistics.mean(data_frame[col_name].values))
 
 
 
