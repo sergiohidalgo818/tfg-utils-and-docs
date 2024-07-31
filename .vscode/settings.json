@@ -42,6 +42,22 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "fstream": "cpp"
-    }
+        "fstream": "cpp",
+        "istream": "cpp",
+        "csignal": "cpp",
+        "strstream": "cpp",
+        "iostream": "cpp",
+        "sstream": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "hindmarsh_rose.h": "c",
+        "stdio.h": "c",
+        "cinttypes": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

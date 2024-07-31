@@ -1,0 +1,2 @@
+function_time,all_functions_time,writing_operations,program_after_writing,frees,total_program
+0.157477,0.657624,24.582619,25.240242,0.117966,25.358209
