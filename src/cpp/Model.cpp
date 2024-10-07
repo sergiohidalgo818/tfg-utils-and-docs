@@ -11,6 +11,7 @@
 #include "../../include/cpp/Model.h"
 
 #include <math.h>
+#include <string>
 
 Model::Model(double time_increment, const char *filename, int elements_in_model)
 {
@@ -94,19 +95,21 @@ void Model::allocate_array(int iterations)
 
 void Model::write_data()
 {
+    std::string buffer;
     for (int i = 0; i < this->data_rows; i++)
     {
         for (int j = 0; j < this->data_cols; j++)
         {
-            this->outfile << this->data[i][j];
+            buffer += std::to_string(this->data[i][j]);
 
             if (j + 1 != this->data_cols)
             {
-                this->outfile << ",";
+                buffer += ",";
             }
         }
-        this->outfile << "\n";
+        buffer+= "\n";
     }
+    this->outfile << buffer;
 }
 
 void Model::free()

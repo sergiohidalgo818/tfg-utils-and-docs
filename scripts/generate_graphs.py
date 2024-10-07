@@ -23,8 +23,8 @@ def plot_model_data(directory:str, filename:str, type_model:str):
     name = filename.split('.')[0]
 
 
-
     plt.savefig("graphs/executions_"+type_model+"/"  + special_dir + "/"+name+ '.png')
+    plt.close()
 
 
 def plot_speed_data(path, type_model:str):
@@ -61,3 +61,5 @@ def plot_speed_data(path, type_model:str):
         ax.set_ylabel("seconds")
 
         plt.savefig("graphs/timings_"+type_model+"/"+col_name+ '.png')
+        plt.close()
+

@@ -4,7 +4,7 @@ from generate_graphs import plot_speed_data, plot_model_data
 
 if __name__=="__main__":
     
-    plot_speed_data("./data/timings_HR",'HR')
+    plot_speed_data("./data/timings_HR", 'HR')
 
     folders = os.listdir("./data/executions_HR/")
 
