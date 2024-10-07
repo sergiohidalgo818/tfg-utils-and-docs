@@ -10,6 +10,8 @@
  */
 #include "../../include/cpp/Model.h"
 
+#include <math.h>
+
 Model::Model(double time_increment, const char *filename, int elements_in_model)
 {
     this->time_increment = time_increment;
@@ -64,7 +66,7 @@ void Model::allocate_array(double start_time, double target_time)
 
     int i = 0;
     double time = target_time - this->time;
-    this->data_rows = (long)((time / time_increment) );
+    this->data_rows = (long)(round(time / time_increment));
 
     this->data_cols = ELEMENTS_RM;
 
@@ -113,9 +115,9 @@ void Model::free()
 
     for (int i = 0; i < this->data_rows; i++)
     {
-        delete (this->data[i]);
+        delete[] this->data[i];
     }
-    delete (this->data);
+    delete[] this->data;
 
-    delete (this);
+    delete this;
 }

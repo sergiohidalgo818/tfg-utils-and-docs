@@ -19,27 +19,27 @@ int main()
     FILE *file;
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-    RulkovMap *a_model = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_a_cpp.csv", ELEMENTS_RM, -1, 0.14, 0, M_VAL, 4.5);
+    RulkovMap *a_model = new RulkovMap(1, "./data/executions_RM/cpp/RM_a_cpp.csv", ELEMENTS_RM, -1, 0.14, 4.5, 0, M_VAL);
 
-    a_model->objective_loop(2000.0);
+    a_model->objective_loop(4000.0);
 
     std::chrono::steady_clock::time_point end_function = std::chrono::steady_clock::now();
 
-    RulkovMap *b_model = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_b_cpp.csv", ELEMENTS_RM, -1, -0.1, 0, M_VAL, 6.0);
+    RulkovMap *b_model = new RulkovMap(1, "./data/executions_RM/cpp/RM_b_cpp.csv", ELEMENTS_RM, -1, -0.1, 6.0, 0, M_VAL);
 
-    b_model->objective_loop(2000.0);
+    b_model->objective_loop(4000.0);
 
-    RulkovMap *c_model = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_c_cpp.csv", ELEMENTS_RM, -1, 0.386, 0, M_VAL, 6.0);
+    RulkovMap *c_model = new RulkovMap(1, "./data/executions_RM/cpp/RM_c_cpp.csv", ELEMENTS_RM, -1, 0.386, 6.0, 0, M_VAL);
 
-    c_model->objective_loop(2000.0);
+    c_model->objective_loop(4000.0);
 
-    RulkovMap *a_model_continue = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_a_cpp_continue.csv", ELEMENTS_RM,  a_model->x, a_model->y, 0.14, 0, M_VAL, 4.5);
-    RulkovMap *b_model_continue = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_b_cpp_continue.csv", ELEMENTS_RM, b_model->x, b_model->y, -0.1, 0, M_VAL, 6.0);
-    RulkovMap *c_model_continue = new RulkovMap(0.001, "./data/executions_RM/cpp/RM_b_cpp_continue.csv", ELEMENTS_RM, c_model->x, c_model->y, 0.386, 0, M_VAL, 6.0);
+    RulkovMap *a_model_continue = new RulkovMap(a_model->time,1, "./data/executions_RM/cpp/RM_a_cpp_continue.csv", ELEMENTS_RM,  a_model->x, a_model->y, 0.14, 4.5, 0, M_VAL);
+    RulkovMap *b_model_continue = new RulkovMap(b_model->time,1, "./data/executions_RM/cpp/RM_b_cpp_continue.csv", ELEMENTS_RM, b_model->x, b_model->y, -0.1, 6.0, 0, M_VAL);
+    RulkovMap *c_model_continue = new RulkovMap(c_model->time,1, "./data/executions_RM/cpp/RM_c_cpp_continue.csv", ELEMENTS_RM, c_model->x, c_model->y, 0.386, 6.0, 0, M_VAL);
 
-    a_model_continue->objective_loop(4000.0);
-    b_model_continue->objective_loop(4000.0);
-    c_model_continue->objective_loop(4000.0);
+    a_model_continue->objective_loop(8000.0);
+    b_model_continue->objective_loop(8000.0);
+    c_model_continue->objective_loop(8000.0);
 
     std::chrono::steady_clock::time_point end_all_functions = std::chrono::steady_clock::now();
 

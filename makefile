@@ -5,6 +5,7 @@ TESTS := tests/
 INCL := include/
 BUILDDIR := build/
 TARGET := bin/runner/
+DATA := data/
 LIB_TEST := -lcppunit 
 LIB_MATH := -lm
 CF:= c/
@@ -15,14 +16,17 @@ CICPPF:= cincpp/
 
 make: create_dirs main
 
-create_dirs:
-	mkdir -p bin | mkdir -p bin/runner | mkdir -p build | mkdir -p data | mkdir -p measures
+create_dirs: create_data_dirs
+	mkdir -p bin | mkdir -p bin/runner | mkdir -p build | mkdir -p measures
 
-main: create_dirs main_hr_cpp main_hr_c main_hr_cppinc main_rm_cpp
+create_data_dirs:
+	mkdir -p data/executions_HR/c data/executions_RM/c data/executions_HR/cpp data/executions_RM/cpp data/executions_HR/cppinc data/executions_RM/cppinc data/timings_HR data/timings_RM
+
+main: create_dirs main_hr_cpp main_hr_c main_hr_cppinc main_rm_cpp main_rm_c
 
 
 
-tests: create_dirs model_tests HindmarshRose_tests
+tests: create_dirs model_tests HindmarshRose_tests 
 
 model_tests: $(SRCDIR)$(CPPF)$(TESTS)Model_tests.cpp Model.o ModelTest.o $(INCL)$(CPPF)$(TESTS)ModelTest.h
 	$(CPPC) $(SRCDIR)$(CPPF)$(TESTS)Model_tests.cpp -o $(TARGET)Model_tests $(LIB_TEST)$(BUILDDIR)Model.o  $(BUILDDIR)ModelTest.o
@@ -39,7 +43,6 @@ HindmarshRosetest.o: $(SRCDIR)$(CPPF)$(TESTS)HindmarshRosetest.cpp $(INCL)$(CPPF
 
 
 
-
 Model.o: $(SRCDIR)$(CPPF)Model.cpp $(INCL)$(CPPF)Model.h 
 	$(CPPC) -c  $(SRCDIR)$(CPPF)Model.cpp -o $(BUILDDIR)Model.o 
 
@@ -51,6 +54,8 @@ RulkovMap.o: $(SRCDIR)$(CPPF)RulkovMap.cpp $(INCL)$(CPPF)RulkovMap.h $(INCL)$(CP
 	$(CPPC) -c  $(SRCDIR)$(CPPF)RulkovMap.cpp -o $(BUILDDIR)RulkovMap.o 
 
 
+rulkov_map.o: $(SRCDIR)$(CF)rulkov_map.c $(INCL)$(CF)rulkov_map.h 
+	$(CC) -c  $(SRCDIR)$(CF)rulkov_map.c -o $(BUILDDIR)rulkov_map.o 
 
 
 hindmarsh_rose.o: $(SRCDIR)$(CF)hindmarsh_rose.c $(INCL)$(CF)hindmarsh_rose.h 
@@ -73,6 +78,8 @@ main_hr_c: $(SRCDIR)$(CF)main_hr_c.c hindmarsh_rose.o $(INCL)$(CF)hindmarsh_rose
 main_rm_cpp: $(SRCDIR)$(CPPF)main_rm_cpp.cpp Model.o RulkovMap.o $(INCL)$(CPPF)RulkovMap.h 
 	$(CPPC) $(SRCDIR)$(CPPF)main_rm_cpp.cpp -o $(TARGET)main_rm_cpp $(BUILDDIR)Model.o $(BUILDDIR)RulkovMap.o 
 
+main_rm_c: $(SRCDIR)$(CF)main_rm_c.c rulkov_map.o $(INCL)$(CF)rulkov_map.h 
+	$(CC) $(SRCDIR)$(CF)main_rm_c.c -o $(TARGET)main_rm_c $(BUILDDIR)rulkov_map.o $(LIB_MATH)
 
 
 clean: clean_all
@@ -81,3 +88,6 @@ clean_objects:
 	rm -f $(BUILDDIR)* 
 clean_runners:
 	rm -f $(TARGET)* 
+
+clean_data:
+	rm -rf $(DATA)* 

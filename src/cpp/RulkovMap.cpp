@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float B, float m, float a) : Model(time_increment, filename, elements_in_model)
+RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model)
 {
     this->x = initial_x;
 
@@ -26,7 +26,36 @@ RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_i
     this->outfile << "x,y,o,time\n";
 }
 
-RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float B, float m,float a) : Model(time_increment, filename, elements_in_model)
+RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model)
+{
+    this->x = initial_x;
+    this->y = initial_y;
+
+    this->o = o;
+    this->B = B;
+    this->m = m;
+    this->a = a;
+
+
+    this->outfile << "x,y,o,time\n";
+}
+
+
+RulkovMap::RulkovMap(double start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model, start_time)
+{
+    this->x = initial_x;
+
+    this->o = o;
+    this->B = B;
+    this->m = m;
+    this->a = a;
+
+    this->calculate_stationary_y();
+
+    this->outfile << "x,y,o,time\n";
+}
+
+RulkovMap::RulkovMap(double start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model, start_time)
 {
     this->x = initial_x;
     this->y = initial_y;
@@ -43,7 +72,7 @@ RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_i
 
 void RulkovMap::calculate_stationary_y()
 {
-    y = m*(x+1)+m*o;
+    y = (time_increment * (-m*(x+1)+(m*o))) ;
 }
 
 void RulkovMap::calculate(int index)
@@ -68,8 +97,9 @@ void RulkovMap::calculate(int index)
     {
         aux_x = -1;
     }
+    // aux_x= (a/(1+x*x)) + y;
 
-    aux_y = y + -m * (x + 1) + m * o;
+    aux_y =y  -m * (x + 1) + m * o;
 
     this->x = aux_x;
     this->y = aux_y;

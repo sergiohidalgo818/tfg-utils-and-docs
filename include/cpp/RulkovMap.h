@@ -45,12 +45,12 @@ public:
      * @param filename name of the file to write
      * @param initial_x initial value of fast variable
      * @param o value of the external bias current (or regime control)
+     * @param a value of the a control map parameter
      * @param B value of the synaptic impulses
      * @param m parameter of small values
-     * @param a value of the a control map parameter
      * @return Returns the model initialized.
      */
-    RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float B, float m,float a);
+    RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float a, float B, float m);
 
     /**
      * @brief This function initialices the model.
@@ -59,12 +59,43 @@ public:
      * @param filename name of the file to write
      * @param initial_y initial value of slow variable
      * @param o value of the external bias current (or regime control)
+     * @param a value of the a control map parameter
      * @param B value of the synaptic impulses
      * @param m parameter of small values
-     * @param a value of the a control map parameter
      * @return Returns the model initialized.
      */
-    RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float B, float m,float a);
+    RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param start_time time to start
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_x initial value of fast variable
+     * @param o value of the external bias current (or regime control)
+     * @param a value of the a control map parameter
+     * @param B value of the synaptic impulses
+     * @param m parameter of small values
+     * @return Returns the model initialized.
+     */
+    RulkovMap(double start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float o, float a, float B, float m);
+
+    /**
+     * @brief This function initialices the model.
+     *
+     * @param start_time time to start
+     * @param time_increment incremet of the time (time step)
+     * @param filename name of the file to write
+     * @param initial_y initial value of slow variable
+     * @param o value of the external bias current (or regime control)
+     * @param a value of the a control map parameter
+     * @param B value of the synaptic impulses
+     * @param m parameter of small values
+     * @return Returns the model initialized.
+     */
+    RulkovMap(double start_time,double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m);
+
 
 
     /**
