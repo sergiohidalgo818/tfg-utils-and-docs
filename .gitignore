@@ -33,3 +33,29 @@
 
 # Data
 *.dat
+*.csv
+
+# Folders
+!bin
+!build
+!data
+!data/executions_HR/
+!data/executions_HR/c
+!data/executions_HR/cpp
+!data/executions_HR/cppinc
+
+!data/executions_RM/
+!data/executions_RM/c
+!data/executions_RM/cpp
+!data/executions_RM/cppinc
+!data/timings_RM/
+!docs
+!graphs
+!graphs/c
+!graphs/cpp
+!graphs/cppinc
+!include
+!makefile
+!resources
+!scripts
+!src

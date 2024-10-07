@@ -11,7 +11,10 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define ELEMENTS_IN_MODEL 4
+#define ELEMENTS_HR 4
+#define ELEMENTS_RM 4
 #define DECIMAL_PRECISION 0.00001
+
+#define M_VAL 0.001
 
 #endif /* CONSTANTS_H */ 

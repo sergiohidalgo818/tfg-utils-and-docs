@@ -59,7 +59,9 @@
         "stdio.h": "c",
         "cinttypes": "cpp",
         "stdlib.h": "c",
-        "constants.h": "c"
+        "constants.h": "c",
+        "filesystem": "cpp",
+        "hindmarshrose.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

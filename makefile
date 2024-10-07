@@ -1,12 +1,15 @@
-CC := g++
-CCC:= gcc
+CPPC := g++
+CC:= gcc
 SRCDIR := src/
-SRCTESTS := src/tests/
+TESTS := tests/
 INCL := include/
-INCLTESTS := include/tests/
 BUILDDIR := build/
 TARGET := bin/runner/
 LIB_TEST := -lcppunit 
+LIB_MATH := -lm
+CF:= c/
+CPPF:= cpp/
+CICPPF:= cincpp/
 .PHONY: clean
 
 
@@ -15,48 +18,61 @@ make: create_dirs main
 create_dirs:
 	mkdir -p bin | mkdir -p bin/runner | mkdir -p build | mkdir -p data | mkdir -p measures
 
-main: create_dirs main_cpp main_c main_cppinc
+main: create_dirs main_hr_cpp main_hr_c main_hr_cppinc main_rm_cpp
 
 
 
 tests: create_dirs model_tests HindmarshRose_tests
 
-model_tests: $(SRCTESTS)Model_tests.cpp Model.o ModelTest.o $(INCLTESTS)ModelTest.h
-	$(CC) $(SRCTESTS)Model_tests.cpp -o $(TARGET)Model_tests $(LIB_TEST) $(BUILDDIR)Model.o  $(BUILDDIR)ModelTest.o
+model_tests: $(SRCDIR)$(CPPF)$(TESTS)Model_tests.cpp Model.o ModelTest.o $(INCL)$(CPPF)$(TESTS)ModelTest.h
+	$(CPPC) $(SRCDIR)$(CPPF)$(TESTS)Model_tests.cpp -o $(TARGET)Model_tests $(LIB_TEST)$(BUILDDIR)Model.o  $(BUILDDIR)ModelTest.o
 
-ModelTest.o: $(SRCTESTS)ModelTest.cpp $(INCLTESTS)ModelTest.h 
-	$(CC) -c  $(SRCTESTS)ModelTest.cpp -o $(BUILDDIR)ModelTest.o 
-
-
-HindmarshRose_tests: $(SRCTESTS)HindmarshRose_tests.cpp HindmarshRose.o HindmarshRosetest.o $(INCLTESTS)HindmarshRosetest.h
-	$(CC) $(SRCTESTS)HindmarshRose_tests.cpp -o $(TARGET)HindmarshRose_tests $(LIB_TEST) $(BUILDDIR)Model.o $(BUILDDIR)HindmarshRose.o $(BUILDDIR)HindmarshRosetest.o 
-
-HindmarshRosetest.o: $(SRCTESTS)HindmarshRosetest.cpp $(INCLTESTS)HindmarshRosetest.h 
-	$(CC) -c  $(SRCTESTS)HindmarshRosetest.cpp -o $(BUILDDIR)HindmarshRosetest.o 
+ModelTest.o: $(SRCDIR)$(TESTS)ModelTest.cpp $(TESTS)ModelTest.h 
+	$(CPPC) -c  $(SRCDIR)$(TESTS)ModelTest.cpp -o $(BUILDDIR)ModelTest.o 
 
 
-main_cpp: $(SRCDIR)main_cpp.cpp Model.o HindmarshRose.o $(INCL)HindmarshRose.h 
-	$(CC) $(SRCDIR)main_cpp.cpp -o $(TARGET)main_cpp $(BUILDDIR)Model.o $(BUILDDIR)HindmarshRose.o 
+HindmarshRose_tests: $(SRCDIR)$(CPPF)$(TESTS)HindmarshRose_tests.cpp HindmarshRose.o HindmarshRosetest.o $(INCL)$(CPPF)$(TESTS)HindmarshRosetest.h
+	$(CPPC) $(SRCDIR)$(CPPF)$(TESTS)HindmarshRose_tests.cpp -o $(TARGET)HindmarshRose_tests $(LIB_TEST) $(BUILDDIR)Model.o $(BUILDDIR)HindmarshRose.o $(BUILDDIR)HindmarshRosetest.o 
 
-Model.o: $(SRCDIR)Model.cpp $(INCL)Model.h 
-	$(CC) -c  $(SRCDIR)Model.cpp -o $(BUILDDIR)Model.o 
-
-HindmarshRose.o: $(SRCDIR)HindmarshRose.cpp $(INCL)HindmarshRose.h $(INCL)Model.h 
-	$(CC) -c  $(SRCDIR)HindmarshRose.cpp -o $(BUILDDIR)HindmarshRose.o 
+HindmarshRosetest.o: $(SRCDIR)$(CPPF)$(TESTS)HindmarshRosetest.cpp $(INCL)$(CPPF)$(TESTS)HindmarshRosetest.h 
+	$(CPPC) -c  $(SRCDIR)$(CPPF)$(TESTS)HindmarshRosetest.cpp -o $(BUILDDIR)HindmarshRosetest.o 
 
 
-main_c: $(SRCDIR)main_c.c hindmarsh_rose.o $(INCL)hindmarsh_rose.h 
-	$(CC) $(SRCDIR)main_c.c -o $(TARGET)main_c $(BUILDDIR)hindmarsh_rose.o 
-
-hindmarsh_rose.o: $(SRCDIR)hindmarsh_rose.c $(INCL)hindmarsh_rose.h 
-	$(CC) -c  $(SRCDIR)hindmarsh_rose.c -o $(BUILDDIR)hindmarsh_rose.o
 
 
-main_cppinc: $(SRCDIR)main_cppinc.cpp hindmarsh_rose_cppinc.o $(INCL)hindmarsh_rose.h 
-	$(CC) $(SRCDIR)main_cppinc.cpp -o $(TARGET)main_cppinc $(BUILDDIR)hindmarsh_rose_cppinc.o 
+Model.o: $(SRCDIR)$(CPPF)Model.cpp $(INCL)$(CPPF)Model.h 
+	$(CPPC) -c  $(SRCDIR)$(CPPF)Model.cpp -o $(BUILDDIR)Model.o 
 
-hindmarsh_rose_cppinc.o: $(SRCDIR)hindmarsh_rose_cppinc.cpp $(INCL)hindmarsh_rose.h 
-	$(CC) -c  $(SRCDIR)hindmarsh_rose_cppinc.cpp -o $(BUILDDIR)hindmarsh_rose_cppinc.o 
+HindmarshRose.o: $(SRCDIR)$(CPPF)HindmarshRose.cpp $(INCL)$(CPPF)HindmarshRose.h $(INCL)$(CPPF)Model.h 
+	$(CPPC) -c  $(SRCDIR)$(CPPF)HindmarshRose.cpp -o $(BUILDDIR)HindmarshRose.o 
+
+
+RulkovMap.o: $(SRCDIR)$(CPPF)RulkovMap.cpp $(INCL)$(CPPF)RulkovMap.h $(INCL)$(CPPF)Model.h 
+	$(CPPC) -c  $(SRCDIR)$(CPPF)RulkovMap.cpp -o $(BUILDDIR)RulkovMap.o 
+
+
+
+
+hindmarsh_rose.o: $(SRCDIR)$(CF)hindmarsh_rose.c $(INCL)$(CF)hindmarsh_rose.h 
+	$(CC) -c  $(SRCDIR)$(CF)hindmarsh_rose.c -o $(BUILDDIR)hindmarsh_rose.o 
+
+
+hindmarsh_rose_cppinc.o: $(SRCDIR)$(CICPPF)hindmarsh_rose_cppinc.cpp $(INCL)$(CF)hindmarsh_rose.h 
+	$(CPPC) -c  $(SRCDIR)$(CICPPF)hindmarsh_rose_cppinc.cpp -o $(BUILDDIR)hindmarsh_rose_cppinc.o 
+
+
+main_hr_cpp: $(SRCDIR)$(CPPF)main_hr_cpp.cpp Model.o HindmarshRose.o $(INCL)$(CPPF)HindmarshRose.h 
+	$(CPPC) $(SRCDIR)$(CPPF)main_hr_cpp.cpp -o $(TARGET)main_hr_cpp $(BUILDDIR)Model.o $(BUILDDIR)HindmarshRose.o 
+
+main_hr_cppinc: $(SRCDIR)$(CICPPF)main_hr_cppinc.cpp hindmarsh_rose_cppinc.o $(INCL)$(CF)hindmarsh_rose.h 
+	$(CPPC) $(SRCDIR)$(CICPPF)main_hr_cppinc.cpp -o $(TARGET)main_hr_cppinc $(BUILDDIR)hindmarsh_rose_cppinc.o  
+
+main_hr_c: $(SRCDIR)$(CF)main_hr_c.c hindmarsh_rose.o $(INCL)$(CF)hindmarsh_rose.h 
+	$(CC) $(SRCDIR)$(CF)main_hr_c.c -o $(TARGET)main_hr_c $(BUILDDIR)hindmarsh_rose.o $(LIB_MATH)
+
+main_rm_cpp: $(SRCDIR)$(CPPF)main_rm_cpp.cpp Model.o RulkovMap.o $(INCL)$(CPPF)RulkovMap.h 
+	$(CPPC) $(SRCDIR)$(CPPF)main_rm_cpp.cpp -o $(TARGET)main_rm_cpp $(BUILDDIR)Model.o $(BUILDDIR)RulkovMap.o 
+
 
 
 clean: clean_all
