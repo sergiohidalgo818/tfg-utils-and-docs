@@ -21,7 +21,7 @@ double **allocate_array(double start_time, double time_increment, double target_
     int i = 0;
     double time = target_time - start_time;
 
-    (*n_lines) = (long)(ceil(time / time_increment));
+    (*n_lines) = (long)(round(time / time_increment));
 
 
     int n_cols = ELEMENTS_HR;

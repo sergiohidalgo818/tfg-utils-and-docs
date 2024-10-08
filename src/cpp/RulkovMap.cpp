@@ -72,7 +72,7 @@ RulkovMap::RulkovMap(double start_time, double time_increment, const char *filen
 
 void RulkovMap::calculate_stationary_y()
 {
-    y = (time_increment * (-m*(x+1)+(m*o))) ;
+    y =  (-m*(x+1)+(m*o)) ;
 }
 
 void RulkovMap::calculate(int index)
