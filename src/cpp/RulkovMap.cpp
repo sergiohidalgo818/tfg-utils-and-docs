@@ -23,7 +23,7 @@ RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_i
 
     this->calculate_stationary_y();
 
-    this->outfile << "x,y,o,time\n";
+    this->outfile << "x;y;o;time\n";
 }
 
 RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model)
@@ -37,7 +37,7 @@ RulkovMap::RulkovMap(double time_increment, const char *filename, int elements_i
     this->a = a;
 
 
-    this->outfile << "x,y,o,time\n";
+    this->outfile << "x;y;o;time\n";
 }
 
 
@@ -52,7 +52,7 @@ RulkovMap::RulkovMap(double start_time, double time_increment, const char *filen
 
     this->calculate_stationary_y();
 
-    this->outfile << "x,y,o,time\n";
+    this->outfile << "x;y;o;time\n";
 }
 
 RulkovMap::RulkovMap(double start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y,  float o, float a, float B, float m) : Model(time_increment, filename, elements_in_model, start_time)
@@ -66,7 +66,7 @@ RulkovMap::RulkovMap(double start_time, double time_increment, const char *filen
     this->a = a;
 
 
-    this->outfile << "x,y,o,time\n";
+    this->outfile << "x;y;o;time\n";
 }
 
 
@@ -80,10 +80,10 @@ void RulkovMap::calculate(int index)
 
     float aux_x, aux_y, aux_z;
 
-    this->data[index][0] = x;
-    this->data[index][1] = y;
-    this->data[index][2] = o;
-    this->data[index][3] = (float)time;
+    this->data[index*this->data_cols+0] = x;
+    this->data[index*this->data_cols+1] = y;
+    this->data[index*this->data_cols+2] = o;
+    this->data[index*this->data_cols+3] = (float)this->time;
 
     if (x <= 0)
     {
@@ -104,5 +104,6 @@ void RulkovMap::calculate(int index)
     this->x = aux_x;
     this->y = aux_y;
 
-    this->time = time + time_increment;
+    this->time = this->time + time_increment;
+
 }

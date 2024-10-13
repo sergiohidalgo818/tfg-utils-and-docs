@@ -3,70 +3,84 @@
  * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
  * @brief Definition file for the c functions
  * @version 0.1
- * @date 2024-10-01
- * 
+ * @date 2024-07-31
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef RULKOV_MAP_H
 #define RULKOV_MAP_H
 
 #include "../constants.h"
+#include "model.h"
 
-
-
-/**
- * @brief This function simulates the hindmarsh rose model, y is stationary.
- *
- * @param x value x
- * @param yz the value of z or y
- * @param start_time the time when the model starts
- * @param time_increment incremet of the time (time step)
- * @param target_time time when it stops
- * @param time pointer to keep last time
- * @param e value of the e constant (> 3.0  is chaotic)
- * @param m value of the m constant
- * @param S value of the S constant
- * @param n_lines number of linesc
- *
- * @return Returns the array of values.
- */
-double **rulkov_map_stationary(double x, double start_time, double time_increment, double target_time, double *time, double o, double a, double B,double m, long *n_lines);
+typedef struct _RulkovMap
+{
+    float x;
+    float y;
+    float o;
+    float a;
+    float B;
+    float m;
+    Model *model;
+} RulkovMap;
 
 /**
- * @brief This function simulates the hindmarsh rose model, z and y are stationary.
+ * @brief This function initialices the model.
  *
- * @param x value x
- * @param start_time the t  e when the model starts
+ * @param start_time time to start
  * @param time_increment incremet of the time (time step)
- * @param target_time time when it stops
- * @param time pointer to keep last time
- * @param e value of the e constant (> 3.0  is chaotic)
- * @param m value of the m constant
- * @param S value of the S constant
- * @param n_lines number of linesc
- *
- * @return Returns the array of values.
+ * @param initial_x initial value of slow variable
+ * @param o value of the external bias current (or regime control)
+ * @param a value of the a control map parameter
+ * @param B value of the synaptic impulses
+ * @param m parameter of small values
+ * @return Returns the model initialized.
  */
-double **rulkov_map(double x, double y, double start_time, double time_increment, double target_time, double *time, double o, double a, double B,double m, long *n_lines);
+RulkovMap *rulkovmap_new_y(double start_time, double time_increment, int elements_in_model, float initial_x, float o, float a, float B, float m);
+
+/**
+ * @brief This function initialices the model.
+ *
+ * @param start_time time to start
+ * @param time_increment incremet of the time (time step)
+ * @param initial_x initial value of slow variable
+ * @param initial_y initial value of slow variable
+ * @param o value of the external bias current (or regime control)
+ * @param a value of the a control map parameter
+ * @param B value of the synaptic impulses
+ * @param m parameter of small values
+ * @return Returns the model initialized.
+ */
+RulkovMap *rulkovmap_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float o, float a, float B, float m);
+
+/**
+ * @brief This iterates and simulates the model
+ * @param target_time the target time
+ * @param calculate function to calculate
+ *
+ */
+void rulkovmap_objective_loop(RulkovMap *model, double target_time);
+
+/**
+ * @brief This iterates and simulates the model
+ * @param iterations number of iterations
+ * @param calculate function to calculate
+ *
+ */
+void rulkovmap_iterations_loop(RulkovMap *model, int iterations);
 
 /**
  * @brief This function allocates the memory of the array
- * @param start_time the time in wich it starts
- * @param time_increment the time step
- * @param target_time the time stop
- * @param n_lines pointer to the number of lines
+ * @param filename the name of the file
  *
- * @return Returns the array allocated.
  */
-double **allocate_array(double start_time, double time_increment, double target_time, long *n_lines);
+void rulkovmap_write_on_file(RulkovMap *rulkovmap, const char *filename);
 
 /**
- * @brief This function frees the memory of the array
- * @param array the array
- * @param n_lines the number of lines
+ * @brief This function frees the memory of the rulkovmap model
  *
  */
-void free_array(double **array, long n_lines);
+void rulkovmap_free(RulkovMap *rulkovmap);
 
 #endif /* RULKOV_MAP_H */

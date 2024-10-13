@@ -70,7 +70,7 @@ int main()
 
     if (!(file = fopen(filename, "r"))) {
         outfile.open(filename);
-        outfile << "function_time,all_functions_time,writing_operations,program_after_writing,frees,total_program\n";
+        outfile << "function_time;all_functions_time;writing_operations;program_after_writing;frees;total_program\n";
     } 
     else
     {
@@ -79,10 +79,10 @@ int main()
     }
     
 
-    outfile << std::chrono::duration<double>(end_function - start).count() << ",";
-    outfile << std::chrono::duration<double>(end_all_functions - start).count() << ",";
-    outfile << std::chrono::duration<double>(end_writing_operations - end_all_functions).count() << ",";
-    outfile << std::chrono::duration<double>(end_writing_operations - start).count() << ",";
-    outfile << std::chrono::duration<double>(end - end_writing_operations).count() << ",";
+    outfile << std::chrono::duration<double>(end_function - start).count() << ";";
+    outfile << std::chrono::duration<double>(end_all_functions - start).count() << ";";
+    outfile << std::chrono::duration<double>(end_writing_operations - end_all_functions).count() << ";";
+    outfile << std::chrono::duration<double>(end_writing_operations - start).count() << ";";
+    outfile << std::chrono::duration<double>(end - end_writing_operations).count() << ";";
     outfile << std::chrono::duration<double>(end - start).count() << "\n";
 }

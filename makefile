@@ -10,19 +10,21 @@ LIB_TEST := -lcppunit
 LIB_MATH := -lm
 CF:= c/
 CPPF:= cpp/
-CPPICF:= cppinc/
 .PHONY: clean
 
 
 make: create_dirs main
 
-create_dirs: create_data_dirs
+create_dirs: create_data_dirs create_graphs_dirs
 	mkdir -p bin | mkdir -p bin/runner | mkdir -p build | mkdir -p measures
 
 create_data_dirs:
-	mkdir -p data/executions_HR/c data/executions_RM/c data/executions_HR/cpp data/executions_RM/cpp data/executions_HR/cppinc data/executions_RM/cppinc data/timings_HR data/timings_RM
+	mkdir -p data/executions_HR/c data/executions_RM/c data/executions_HR/cpp data/executions_RM/cpp data/executions_HR/c data/executions_RM/cppinc data/timings_HR data/timings_RM
 
-main: create_dirs main_hr_cpp main_hr_c main_hr_cppinc main_rm_cpp main_rm_c main_rm_cppinc
+create_graphs_dirs:
+	mkdir -p graphs/executions_HR/c graphs/executions_RM/c graphs/executions_HR/cpp graphs/executions_RM/cpp graphs/executions_HR/c graphs/executions_RM/cppinc graphs/timings_HR graphs/timings_RM
+
+main: create_dirs main_hr_cpp main_rm_cpp  main_hr_c main_rm_c 
 
 
 
@@ -49,43 +51,29 @@ Model.o: $(SRCDIR)$(CPPF)Model.cpp $(INCL)$(CPPF)Model.h
 HindmarshRose.o: $(SRCDIR)$(CPPF)HindmarshRose.cpp $(INCL)$(CPPF)HindmarshRose.h $(INCL)$(CPPF)Model.h 
 	$(CPPC) -c  $(SRCDIR)$(CPPF)HindmarshRose.cpp -o $(BUILDDIR)HindmarshRose.o 
 
-
 RulkovMap.o: $(SRCDIR)$(CPPF)RulkovMap.cpp $(INCL)$(CPPF)RulkovMap.h $(INCL)$(CPPF)Model.h 
 	$(CPPC) -c  $(SRCDIR)$(CPPF)RulkovMap.cpp -o $(BUILDDIR)RulkovMap.o 
 
+model.o: $(SRCDIR)$(CF)model.c $(INCL)$(CF)model.h 
+	$(CC) -c  $(SRCDIR)$(CF)model.c -o $(BUILDDIR)model.o 
 
-rulkov_map.o: $(SRCDIR)$(CF)rulkov_map.c $(INCL)$(CF)rulkov_map.h 
+rulkov_map.o: $(SRCDIR)$(CF)rulkov_map.c $(INCL)$(CF)rulkov_map.h $(INCL)$(CF)model.h 
 	$(CC) -c  $(SRCDIR)$(CF)rulkov_map.c -o $(BUILDDIR)rulkov_map.o 
 
-rulkov_map_cppinc.o: $(SRCDIR)$(CPPICF)rulkov_map_cppinc.cpp $(INCL)$(CPPICF)rulkov_map_cppinc.h 
-	$(CPPC) -c  $(SRCDIR)$(CPPICF)rulkov_map_cppinc.cpp -o $(BUILDDIR)rulkov_map_cppinc.o 
-
-
-hindmarsh_rose.o: $(SRCDIR)$(CF)hindmarsh_rose.c $(INCL)$(CF)hindmarsh_rose.h 
-	$(CC) -c  $(SRCDIR)$(CF)hindmarsh_rose.c -o $(BUILDDIR)hindmarsh_rose.o 
-
-
-hindmarsh_rose_cppinc.o: $(SRCDIR)$(CPPICF)hindmarsh_rose_cppinc.cpp $(INCL)$(CF)hindmarsh_rose.h 
-	$(CPPC) -c  $(SRCDIR)$(CPPICF)hindmarsh_rose_cppinc.cpp -o $(BUILDDIR)hindmarsh_rose_cppinc.o 
-
+hindmarsh_rose.o: $(SRCDIR)$(CF)hindmarsh_rose.c $(INCL)$(CF)hindmarsh_rose.h $(INCL)$(CF)model.h 
+	$(CC) -c  $(SRCDIR)$(CF)hindmarsh_rose.c -o $(BUILDDIR)hindmarsh_rose.o  
 
 main_hr_cpp: $(SRCDIR)$(CPPF)main_hr_cpp.cpp Model.o HindmarshRose.o $(INCL)$(CPPF)HindmarshRose.h 
 	$(CPPC) $(SRCDIR)$(CPPF)main_hr_cpp.cpp -o $(TARGET)main_hr_cpp $(BUILDDIR)Model.o $(BUILDDIR)HindmarshRose.o 
 
-main_hr_cppinc: $(SRCDIR)$(CPPICF)main_hr_cppinc.cpp hindmarsh_rose_cppinc.o $(INCL)$(CF)hindmarsh_rose.h 
-	$(CPPC) $(SRCDIR)$(CPPICF)main_hr_cppinc.cpp -o $(TARGET)main_hr_cppinc $(BUILDDIR)hindmarsh_rose_cppinc.o  
-
-main_hr_c: $(SRCDIR)$(CF)main_hr_c.c hindmarsh_rose.o $(INCL)$(CF)hindmarsh_rose.h 
-	$(CC) $(SRCDIR)$(CF)main_hr_c.c -o $(TARGET)main_hr_c $(BUILDDIR)hindmarsh_rose.o $(LIB_MATH)
+main_hr_c: $(SRCDIR)$(CF)main_hr_c.c model.o hindmarsh_rose.o $(INCL)$(CF)hindmarsh_rose.h 
+	$(CC) $(SRCDIR)$(CF)main_hr_c.c -o $(TARGET)main_hr_c $(BUILDDIR)hindmarsh_rose.o  $(BUILDDIR)model.o $(LIB_MATH)
 
 main_rm_cpp: $(SRCDIR)$(CPPF)main_rm_cpp.cpp Model.o RulkovMap.o $(INCL)$(CPPF)RulkovMap.h 
 	$(CPPC) $(SRCDIR)$(CPPF)main_rm_cpp.cpp -o $(TARGET)main_rm_cpp $(BUILDDIR)Model.o $(BUILDDIR)RulkovMap.o 
-
-main_rm_cppinc: $(SRCDIR)$(CPPICF)main_rm_cppinc.cpp rulkov_map_cppinc.o $(INCL)$(CPPICF)rulkov_map_cppinc.h 
-	$(CPPC) $(SRCDIR)$(CPPICF)main_rm_cppinc.cpp -o $(TARGET)main_rm_cppinc $(BUILDDIR)rulkov_map_cppinc.o $(LIB_MATH)
-
-main_rm_c: $(SRCDIR)$(CF)main_rm_c.c rulkov_map.o $(INCL)$(CF)rulkov_map.h 
-	$(CC) $(SRCDIR)$(CF)main_rm_c.c -o $(TARGET)main_rm_c $(BUILDDIR)rulkov_map.o $(LIB_MATH)
+	
+main_rm_c: $(SRCDIR)$(CF)main_rm_c.c model.o rulkov_map.o $(INCL)$(CF)rulkov_map.h 
+	$(CC) $(SRCDIR)$(CF)main_rm_c.c -o $(TARGET)main_rm_c $(BUILDDIR)rulkov_map.o $(BUILDDIR)model.o $(LIB_MATH)
 
 
 clean: clean_all

@@ -1,9 +1,9 @@
 /**
  * @file rulkov_map.c
  * @author Sergio Hidalgo (sergio.hidalgo@estudiante.uam.es)
- * @brief Implementation file in c of the functions for Rulkov-Map model
+ * @brief Implementation file in c of the functions for Hindmarsh-Rose model
  * @version 0.1
- * @date 2024-10-01
+ * @date 2024-07-31
  *
  * @copyright Copyright (c) 2024
  *
@@ -11,56 +11,102 @@
 #include "../../include/c/rulkov_map.h"
 
 #include <stdlib.h>
-
 #include <math.h>
 
-double **allocate_array(double start_time, double time_increment, double target_time, long *n_lines)
+double calculate_stationary_y(RulkovMap *rulkovmap);
+
+
+RulkovMap *rulkovmap_new_y(double start_time, double time_increment, int elements_in_model, float initial_x, float o, float a, float B, float m)
 {
-    double **array;
-    int i = 0;
-    double time = target_time - start_time;
+    RulkovMap *rulkovmap;
+    int i = 0, j = 0;
 
-    (*n_lines) = (long)(ceil(time / time_increment));
-
-    int n_cols = ELEMENTS_HR;
-
-    array = (double **)malloc((*n_lines) * sizeof(double *));
-
-    for (i; i < (*n_lines); i++)
-        array[i] = (double *)malloc(n_cols * sizeof(double));
-
-    return array;
-}
-
-void free_array(double **array, long n_lines)
-{
-    int i = 0;
-    for (i; i < n_lines; i++)
+    if (time_increment < 0 || elements_in_model < 1)
     {
-        free(array[i]);
+        return NULL;
     }
+    rulkovmap = (RulkovMap *)malloc(sizeof(RulkovMap));
 
-    free(array);
-}
-
-double calculate_stationary_y(double x, double time_increment, double m, double o)
-{
-    return (time_increment * (-m*(x+1)+(m*o))) ;
-}
-
-void calculate(double *x_ptr, double *y_ptr, double time_increment, double *time, double o, double a, double B, double m)
-{
-    double aux_x, aux_y;
-    double x = (*x_ptr);
-    double y = (*y_ptr);
-
-    if (x <= 0)
+    if (rulkovmap == NULL)
     {
-        aux_x = (a / (1 - x)) + (y + B);
+        return NULL;
     }
-    else if (x < (a + (y + B)))
+    rulkovmap->model = model_new(start_time, time_increment, elements_in_model, (void *)rulkovmap);
+
+    if (rulkovmap->model == NULL)
     {
-        aux_x = a + (y + B);
+        return NULL;
+    }
+    rulkovmap->x = initial_x;
+    
+    rulkovmap->o = o;
+    rulkovmap->a = a;
+    rulkovmap->B = B;
+    rulkovmap->m = m;
+
+    rulkovmap->y = calculate_stationary_y(rulkovmap);
+
+    return rulkovmap;
+}
+RulkovMap *rulkovmap_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float o, float a, float B, float m)
+{
+    RulkovMap *rulkovmap;
+    int i = 0, j = 0;
+
+    if (time_increment < 0 || elements_in_model < 1)
+    {
+        return NULL;
+    }
+    rulkovmap = (RulkovMap *)malloc(sizeof(RulkovMap));
+
+    if (rulkovmap == NULL)
+    {
+        return NULL;
+    }
+    rulkovmap->model = model_new(start_time, time_increment, elements_in_model, (void *)rulkovmap);
+
+    if (rulkovmap->model == NULL)
+    {
+        return NULL;
+    }
+    rulkovmap->x = initial_x;
+    rulkovmap->y = initial_y;
+
+    rulkovmap->a = a;
+    rulkovmap->B = B;
+    rulkovmap->m = m;
+
+    rulkovmap->o = o;
+
+
+    return rulkovmap;
+}
+
+
+
+double calculate_stationary_y(RulkovMap *rulkovmap)
+{
+    return (-rulkovmap->m*(rulkovmap->x+1)+(rulkovmap->m*rulkovmap->o)) ;
+}
+
+
+void calculate(Model *model, int index)
+{
+    float aux_x, aux_y, aux_z;
+    RulkovMap *actual_model = (RulkovMap *)model->model_type;
+
+    model->data[index*model->data_cols] = actual_model->x;
+    model->data[index*model->data_cols + 1] = actual_model->y;
+    model->data[index*model->data_cols + 2] = actual_model->o;
+    model->data[index*model->data_cols + 3] = (float)model->time;
+
+    if (actual_model->x <= 0)
+    {
+        aux_x = (actual_model->a / (1 - actual_model->x)) + (actual_model->y + actual_model->B);
+    }
+    else if (actual_model->x < (actual_model->a + (actual_model->y + actual_model->B)))
+    {
+        aux_x = actual_model->a + (actual_model->y + actual_model->B);
     }
     else
     {
@@ -68,58 +114,32 @@ void calculate(double *x_ptr, double *y_ptr, double time_increment, double *time
     }
     // aux_x= (a/(1+x*x)) + y;
 
-    aux_y = y - m * (x + 1) + m * o;
+    aux_y =actual_model-> y - actual_model->m * (actual_model->x + 1) + actual_model->m * actual_model->o;
+    actual_model->x = aux_x;
+    actual_model->y = aux_y;
+    
 
-    (*x_ptr) = aux_x;
-    (*y_ptr) = aux_y;
-
-    (*time) = (*time) + time_increment;
+    model->time = model->time + model->time_increment;
 }
 
-double **rulkov_map_stationary(double x, double start_time, double time_increment, double target_time, double *time, double o, double a, double B, double m, long *n_lines)
+void rulkovmap_objective_loop(RulkovMap *rulkovmap, double target_time)
 {
-    (*time) = start_time;
-    double y;
-
-    y = calculate_stationary_y( x, time_increment, m, o);
-
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
-
-    int counter = 0;
-
-    while ((target_time - (*time)) > DECIMAL_PRECISION)
-    {
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = o;
-        array[counter][3] = (*time);
-        calculate(&x, &y, time_increment, time, o, a, B, m);
-        counter++;
-    }
-
-    return array;
+    model_objective_loop(rulkovmap->model, target_time, calculate);
 }
 
-
-double **rulkov_map(double x, double y, double start_time, double time_increment, double target_time, double *time, double o, double a, double B, double m, long *n_lines)
+void rulkovmap_iterations_loop(RulkovMap *rulkovmap, int iterations)
 {
-    (*time) = start_time;
+    model_iterations_loop(rulkovmap->model, iterations, calculate);
+}
 
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
+void rulkovmap_write_on_file(RulkovMap *rulkovmap, const char *filename)
+{
+    model_write_on_file(rulkovmap->model,  filename, "x;y;o;time\n");
+}
 
-    int counter = 0;
+void rulkovmap_free(RulkovMap *rulkovmap)
+{
+    model_free(rulkovmap->model);
 
-    while ((target_time - (*time)) > DECIMAL_PRECISION)
-    {
-
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = o;
-        array[counter][3] = (*time);
-        calculate(&x, &y, time_increment, time, o, a, B, m);
-
-        counter++;
-    }
-
-    return array;
+    free(rulkovmap);
 }

@@ -37,9 +37,8 @@ public:
     double time;
     double time_increment;
     std::ofstream outfile;
-    float **data;
+    float *data;
     bool perpetual;
-    int elements_in_model;
 public:
     /**
      * @brief This function initialices the model.

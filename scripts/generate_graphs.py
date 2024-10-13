@@ -11,7 +11,7 @@ def plot_model_data(directory:str, filename:str, type_model:str):
 
     
     print("ploting " + filename)
-    data_frame = pd.read_csv(directory + filename, sep=",")
+    data_frame = pd.read_csv(directory + filename, sep=";")
     data_frame = data_frame[['x', 'time']]
 
     plt.figure( figsize=(12,6) )
@@ -41,7 +41,7 @@ def plot_speed_data(path, type_model:str):
     for filename in files:
         labels.append(filename)
 
-        data_frame = pd.read_csv(path + "/" + filename, sep=",")
+        data_frame = pd.read_csv(path + "/" + filename, sep=";")
         data_frames.append(data_frame)
 
 

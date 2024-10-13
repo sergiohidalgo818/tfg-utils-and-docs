@@ -23,7 +23,7 @@ HindmarshRose::HindmarshRose(double time_increment, const char *filename, int el
     this->calculate_stationary_y();
     this->calculate_stationary_z();
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y;z;time\n";
 }
 
 HindmarshRose::HindmarshRose(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S) : Model(time_increment, filename, elements_in_model)
@@ -36,7 +36,7 @@ HindmarshRose::HindmarshRose(double time_increment, const char *filename, int el
     this->m = m;
     this->S = S;
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y,z;time\n";
 }
 
 HindmarshRose::HindmarshRose(double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode) : Model(time_increment, filename, elements_in_model)
@@ -64,7 +64,7 @@ HindmarshRose::HindmarshRose(double time_increment, const char *filename, int el
         this->calculate_stationary_z();
     }
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y;z;time\n";
 }
 
 HindmarshRose::HindmarshRose(float start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float e, float m, float S) : Model(time_increment, filename, elements_in_model, start_time)
@@ -78,7 +78,7 @@ HindmarshRose::HindmarshRose(float start_time, double time_increment, const char
     this->calculate_stationary_y();
     this->calculate_stationary_z();
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y;z;time\n";
 }
 
 HindmarshRose::HindmarshRose(float start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S) : Model(time_increment, filename, elements_in_model, start_time)
@@ -91,7 +91,7 @@ HindmarshRose::HindmarshRose(float start_time, double time_increment, const char
     this->m = m;
     this->S = S;
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y;z;time\n";
 }
 
 HindmarshRose::HindmarshRose(float start_time, double time_increment, const char *filename, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode) : Model(time_increment, filename,  elements_in_model, start_time)
@@ -118,7 +118,7 @@ HindmarshRose::HindmarshRose(float start_time, double time_increment, const char
         this->calculate_stationary_z();
     }
 
-    this->outfile << "x,y,z,time\n";
+    this->outfile << "x;y;z;time\n";
 }
 
 void HindmarshRose::calculate_stationary_y()
@@ -136,10 +136,11 @@ void HindmarshRose::calculate(int index)
 
     float aux_x, aux_y, aux_z;
 
-    this->data[index][0] = x;
-    this->data[index][1] = y;
-    this->data[index][2] = z;
-    this->data[index][3] = (float)time;
+    this->data[index*this->data_cols] = x;
+    this->data[index*this->data_cols+1] = y;
+    this->data[index*this->data_cols+2] = z;
+    this->data[index*this->data_cols+3] = (float)time;
+
 
     aux_x = x + time_increment * (y + 3 * x * x - x * x * x - z + e);
     aux_y = y + time_increment * (1 - 5 * x * x - y);
@@ -150,5 +151,6 @@ void HindmarshRose::calculate(int index)
     this->z = aux_z;
 
     this->time = time + time_increment;
+
 }
 

@@ -4,153 +4,178 @@
  * @brief Implementation file in c of the functions for Hindmarsh-Rose model
  * @version 0.1
  * @date 2024-07-31
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #include "../../include/c/hindmarsh_rose.h"
 
 #include <stdlib.h>
-
 #include <math.h>
 
-double **allocate_array(double start_time, double time_increment, double target_time, long *n_lines)
+double calculate_stationary_y(HindmarshRose *hindmarshrose);
+double calculate_stationary_z(HindmarshRose *hindmarshrose);
+
+HindmarshRose *hindmarshrose_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S)
 {
-    double **array;
-    int i = 0;
-    double time = target_time - start_time;
+    HindmarshRose *hindmarshrose;
+    int i = 0, j = 0;
 
-    (*n_lines) = (long)(ceil(time / time_increment));
-
-
-    int n_cols = ELEMENTS_HR;
-
-    array = (double **)malloc((*n_lines) * sizeof(double *));
-
-    for (i; i < (*n_lines); i++)
-        array[i] = (double *)malloc(n_cols * sizeof(double));
-
-    return array;
-}
-
-void free_array(double **array, long n_lines)
-{
-    int i = 0;
-    for (i; i < n_lines; i++)
+    if (time_increment < 0 || elements_in_model < 1)
     {
-        free(array[i]);
+        return NULL;
     }
+    hindmarshrose = (HindmarshRose *)malloc(sizeof(HindmarshRose));
 
-    free(array);
+    if (hindmarshrose == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->model = model_new(start_time, time_increment, elements_in_model, (void *)hindmarshrose);
+
+    if (hindmarshrose->model == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->x = initial_x;
+    hindmarshrose->y = initial_y;
+    hindmarshrose->z = initial_z;
+
+    hindmarshrose->e = e;
+    hindmarshrose->m = m;
+    hindmarshrose->S = S;
+
+    return hindmarshrose;
 }
 
-double calculate_stationary_y(double x, double time_increment)
+HindmarshRose *hindmarshrose_new_y_or_z(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode)
 {
-    return (time_increment * (1 - 5 * x * x)) / (time_increment - 1);
-}
+    HindmarshRose *hindmarshrose;
+    int i = 0, j = 0;
 
-double calculate_stationary_z(double x, double time_increment, double m, double S)
-{
-    return (time_increment * m * S * (x + 1.6)) / (time_increment * m - 1);
-}
+    if (time_increment < 0 || elements_in_model < 1)
+    {
+        return NULL;
+    }
+    hindmarshrose = (HindmarshRose *)malloc(sizeof(HindmarshRose));
 
-void calculate(double *x_ptr, double *y_ptr, double *z_ptr, double time_increment, double *time, double e, double m, double S)
-{
-    double aux_x, aux_y, aux_z;
-    double x = (*x_ptr);
-    double y = (*y_ptr);
-    double z = (*z_ptr);
+    if (hindmarshrose == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->model = model_new(start_time, time_increment, elements_in_model, (void *)hindmarshrose);
 
-    aux_x = x + time_increment * (y + 3 * x * x - x * x * x - z + e);
-    aux_y = y + time_increment * (1 - 5 * x * x - y);
-    aux_z = z + time_increment * m * (-z + S * (x + 1.6));
+    if (hindmarshrose->model == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->x = initial_x;
 
-    (*x_ptr) = aux_x;
-    (*y_ptr) = aux_y;
-    (*z_ptr) = aux_z;
-
-    (*time) = (*time) + time_increment;
-}
-
-double **hindmarsh_rose_stationary_y_or_z(double x, double yz, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines, StationaryMode mode)
-{
-    (*time) = start_time;
-    double z, y;
+    hindmarshrose->e = e;
+    hindmarshrose->m = m;
+    hindmarshrose->S = S;
 
     if (mode == Y_STATIONARY)
     {
-        y = calculate_stationary_y(x, time_increment);
+        hindmarshrose->y = initial_yz;
+        hindmarshrose->y = calculate_stationary_y(hindmarshrose);
     }
     else if (mode = Z_STATIONARY)
     {
-        z = calculate_stationary_z(x, time_increment, m, S);
+        hindmarshrose->y = initial_yz;
+        hindmarshrose->z = calculate_stationary_z(hindmarshrose);
     }
     else
     {
-        y = calculate_stationary_y(x, time_increment);
-        z = calculate_stationary_z(x, time_increment, m, S);
+        hindmarshrose->y = calculate_stationary_y(hindmarshrose);
+        hindmarshrose->z = calculate_stationary_z(hindmarshrose);
     }
 
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
-
-    int counter = 0;
-
-    while ((target_time - (*time)) > DECIMAL_PRECISION)
-    {
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = z;
-        array[counter][3] = (*time);
-        calculate(&x, &y, &z, time_increment, time, e, m, S);
-        counter++;
-    }
-
-    return array;
+    return hindmarshrose;
 }
 
-double **hindmarsh_rose_stationary_yz(double x, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines)
+HindmarshRose *hindmarshrose_new_yz(double start_time, double time_increment, int elements_in_model, float initial_x, float e, float m, float S)
 {
-    (*time) = start_time;
+    HindmarshRose *hindmarshrose;
+    int i = 0, j = 0;
 
-    double y = calculate_stationary_y(x, time_increment);
-    double z = calculate_stationary_z(x, time_increment, m, S);
-
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
-
-    int counter = 0;
-
-    while ((target_time - (*time)) > DECIMAL_PRECISION )
+    if (time_increment < 0 || elements_in_model < 1)
     {
-
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = z;
-        array[counter][3] = (*time);
-        calculate(&x, &y, &z, time_increment, time, e, m, S);
-        counter++;
+        return NULL;
     }
-    return array;
+    hindmarshrose = (HindmarshRose *)malloc(sizeof(HindmarshRose));
+
+    if (hindmarshrose == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->model = model_new(start_time, time_increment, elements_in_model, (void *)hindmarshrose);
+
+    if (hindmarshrose->model == NULL)
+    {
+        return NULL;
+    }
+    hindmarshrose->x = initial_x;
+
+    hindmarshrose->e = e;
+    hindmarshrose->m = m;
+    hindmarshrose->S = S;
+
+    hindmarshrose->y = calculate_stationary_y(hindmarshrose);
+    hindmarshrose->z = calculate_stationary_z(hindmarshrose);
+
+    return hindmarshrose;
 }
 
-double **hindmarsh_rose(double x, double y, double z, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines)
+double calculate_stationary_y(HindmarshRose *hindmarshrose)
 {
-    (*time) = start_time;
+    return (hindmarshrose->model->time_increment * (1 - 5 * hindmarshrose->x * hindmarshrose->x)) / (hindmarshrose->model->time_increment - 1);
+}
 
-    double **array = allocate_array(start_time, time_increment, target_time, n_lines);
+double calculate_stationary_z(HindmarshRose *hindmarshrose)
+{
+    return (hindmarshrose->model->time_increment * hindmarshrose->m * hindmarshrose->S * (hindmarshrose->x + 1.6)) / (hindmarshrose->model->time_increment * hindmarshrose->m - 1);
+}
 
-    int counter = 0;
+void calculate(Model *model, int index)
+{
+    float aux_x, aux_y, aux_z;
+    HindmarshRose *actual_model = (HindmarshRose *)model->model_type;
 
-    while ((target_time - (*time)) > DECIMAL_PRECISION )
-    {
+    model->data[index*model->data_cols] = actual_model->x;
+    model->data[index*model->data_cols + 1] = actual_model->y;
+    model->data[index*model->data_cols + 2] = actual_model->z;
+    model->data[index*model->data_cols + 3] = (float)model->time;
 
-        array[counter][0] = x;
-        array[counter][1] = y;
-        array[counter][2] = z;
-        array[counter][3] = (*time);
-        calculate(&x, &y, &z, time_increment, time, e, m, S);
+    aux_x = actual_model->x + model->time_increment * (actual_model->y + 3 * actual_model->x * actual_model->x - actual_model->x * actual_model->x * actual_model->x - actual_model->z + actual_model->e);
+    aux_y = actual_model->y + model->time_increment * (1 - 5 * actual_model->x * actual_model->x - actual_model->y);
+    aux_z = actual_model->z + model->time_increment * actual_model->m * (-actual_model->z + actual_model->S * (actual_model->x + 1.6));
 
-        counter++;
-    }
+    actual_model->x = aux_x;
+    actual_model->y = aux_y;
+    actual_model->z = aux_z;
 
-    return array;
+    model->time = model->time + model->time_increment;
+}
+
+void hindmarshrose_objective_loop(HindmarshRose *hindmarshrose, double target_time)
+{
+    model_objective_loop(hindmarshrose->model, target_time, calculate);
+}
+
+void hindmarshrose_iterations_loop(HindmarshRose *hindmarshrose, int iterations)
+{
+    model_iterations_loop(hindmarshrose->model, iterations, calculate);
+}
+
+void hindmarshrose_write_on_file(HindmarshRose *hindmarshrose, const char *filename)
+{
+    model_write_on_file(hindmarshrose->model,  filename, "x;y;z;time\n");
+}
+
+void hindmarshrose_free(HindmarshRose *hindmarshrose)
+{
+    model_free(hindmarshrose->model);
+
+    free(hindmarshrose);
 }

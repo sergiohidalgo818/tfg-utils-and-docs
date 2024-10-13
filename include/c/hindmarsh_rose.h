@@ -12,6 +12,7 @@
 #define HINDMARSH_ROSE_H
 
 #include "../constants.h"
+#include "model.h"
 
 
 /**
@@ -21,81 +22,101 @@
 typedef enum
 {
   Y_STATIONARY = 1,
-  Z_STATIONARY = 2
+  Z_STATIONARY = 2 
 } StationaryMode;
 
-/**
- * @brief This function simulates the hindmarsh rose model, y is stationary.
- *
- * @param x value x
- * @param yz the value of z or y
- * @param start_time the time when the model starts
- * @param time_increment incremet of the time (time step)
- * @param target_time time when it stops
- * @param time pointer to keep last time
- * @param e value of the e constant (> 3.0  is chaotic)
- * @param m value of the m constant
- * @param S value of the S constant
- * @param n_lines number of linesc
- *
- * @return Returns the array of values.
- */
-double **hindmarsh_rose_stationary_y_or_z(double x, double yz, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines, StationaryMode mode);
+typedef struct _HindmarshRose 
+{
+    float x;
+    float y;
+    float z;
+    float e;
+    float S;
+    float m;
+    StationaryMode mode;
+    Model *model;
+}HindmarshRose;
 
 /**
  * @brief This function simulates the hindmarsh rose model, z and y are stationary.
  *
- * @param x value x
- * @param start_time the t  e when the model starts
  * @param time_increment incremet of the time (time step)
- * @param target_time time when it stops
- * @param time pointer to keep last time
+ * @param start_time the t  e when the model starts
+ * @param elements_in_model number of elements in the model
+ * @param initial_x value x
  * @param e value of the e constant (> 3.0  is chaotic)
  * @param m value of the m constant
  * @param S value of the S constant
- * @param n_lines number of linesc
  *
  * @return Returns the array of values.
  */
-double **hindmarsh_rose_stationary_yz(double x, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines);
+HindmarshRose *hindmarshrose_new_yz( double start_time, double time_increment, int elements_in_model,float initial_x, float e, float m, float S);
+
+/**
+ * @brief This function simulates the hindmarsh rose model, z and y are stationary.
+ *
+ * @param time_increment incremet of the time (time step)
+ * @param start_time the t  e when the model starts
+ * @param elements_in_model number of elements in the model
+ * @param initial_x value x
+ * @param initial_yz value of y or z
+ * @param e value of the e constant (> 3.0  is chaotic)
+ * @param m value of the m constant
+ * @param S value of the S constant
+ *
+ * @return Returns the array of values.
+ */
+HindmarshRose *hindmarshrose_new_y_or_z( double start_time,double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode);
+
+
 
 /**
  * @brief This function simulates the hindmarsh rose model
  *
- * @param x value x
- * @param y the value y
- * @param z the value z
  * @param start_time the time when the model starts
  * @param time_increment incremet of the time (time step)
- * @param target_time time when it stops
- * @param time pointer to keep last time
+ * @param initial_x value x
+ * @param initial_y the value y
+ * @param initial_z the value z
  * @param e value of the e constant (> 3.0  is chaotic)
  * @param m value of the m constant
  * @param S value of the S constant
- * @param n_lines number of linesc
  *
  * @return Returns the array of values.
  */
-double **hindmarsh_rose(double x, double y, double z, double start_time, double time_increment, double target_time, double *time, double e, double m, double S, long *n_lines);
+HindmarshRose *hindmarshrose_new( double start_time, double time_increment,  int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S);
+
+
+/**
+ * @brief This iterates and simulates the model
+ * @param target_time the target time
+ * @param calculate function to calculate
+ *
+ */
+void hindmarshrose_objective_loop(HindmarshRose *model, double target_time);
+
+
+/**
+ * @brief This iterates and simulates the model
+ * @param iterations number of iterations
+ * @param calculate function to calculate
+ *
+ */
+void hindmarshrose_iterations_loop(HindmarshRose *model, int iterations);
 
 
 /**
  * @brief This function allocates the memory of the array
- * @param start_time the time in wich it starts
- * @param time_increment the time step
- * @param target_time the time stop
- * @param n_lines pointer to the number of lines
+ * @param filename the name of the file
  *
- * @return Returns the array allocated.
  */
-double **allocate_array(double start_time, double time_increment, double target_time, long *n_lines);
+void hindmarshrose_write_on_file(HindmarshRose *hindmarshrose, const char* filename);
 
 /**
- * @brief This function frees the memory of the array
- * @param array the array
- * @param n_lines the number of lines
+ * @brief This function frees the memory of the hindmarshrose model
  *
  */
-void free_array(double **array, long n_lines);
+void hindmarshrose_free(HindmarshRose *hindmarshrose);
+
 
 #endif /* HINDMARSH_ROSE_H */
