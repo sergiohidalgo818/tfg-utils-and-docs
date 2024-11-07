@@ -22,7 +22,6 @@
  * @param Sfast value of the S fast constant
  * @param Esyn value of the E constant
  * @param Vfast value of the V fast constant
- *
  */
 class HindmarshRoseFastSyn : public HindmarshRose
 {

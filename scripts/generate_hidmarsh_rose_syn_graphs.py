@@ -8,15 +8,16 @@ if __name__=="__main__":
     folders = os.listdir("./data/executions_HR_syn/")
 
     contents = [('regular', 'continue')]
+    list1=['HR_syn_regular_neuron1_','HR_syn_regular_neuron2_']
+    list2=['HR_syn_chaotic_neuron1_','HR_syn_chaotic_neuron2_']
+    list3=['HR_syn_regular_neuron1_continue_','HR_syn_regular_neuron2_continue_']
+    list4=['HR_syn_chaotic_neuron1_continue_','HR_syn_chaotic_neuron2_continue_']
 
     for folder in folders:
         all_files = os.listdir("./data/executions_HR_syn/"+folder)
         type_model='HR_syn'
 
-        list1=['HR_syn_regular_neuron1_cpp.csv','HR_syn_regular_neuron2_cpp.csv']
-        list2=['HR_syn_chaotic_neuron1_cpp.csv','HR_syn_chaotic_neuron2_cpp.csv']
-        list3=['HR_syn_regular_neuron1_continue_cpp.csv','HR_syn_regular_neuron2_continue_cpp.csv']
-        list4=['HR_syn_chaotic_neuron1_continue_cpp.csv','HR_syn_chaotic_neuron2_continue_cpp.csv']
+
 
 
         for files in [list1, list2, list3, list4]:
@@ -24,7 +25,7 @@ if __name__=="__main__":
 
             for file in files:
                 directory="./data/executions_HR_syn/"+folder+ "/"
-                filename=file
+                filename=file + folder + ".csv"
 
                 if not os.path.exists("graphs/executions_"+type_model+"/" + folder):
                     os.makedirs("graphs/executions_"+type_model+"/" + folder)
@@ -40,7 +41,7 @@ if __name__=="__main__":
 
             if len(files)>0:
                 print("ploting " + type_model+ "_" + filename)
-                plt.savefig("graphs/executions_"+type_model+"/"  + folder + "/"+ filename+ '.png')
+                plt.savefig("graphs/executions_"+type_model+"/"  + folder + "/"+ filename.split(".csv")[0]+ '.png')
                 plt.close()
 
 

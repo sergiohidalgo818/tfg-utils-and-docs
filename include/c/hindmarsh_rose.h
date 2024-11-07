@@ -90,7 +90,6 @@ HindmarshRose *hindmarshrose_new( double start_time, double time_increment,  int
 /**
  * @brief This iterates and simulates the model
  * @param target_time the target time
- * @param calculate function to calculate
  *
  */
 void hindmarshrose_objective_loop(HindmarshRose *model, double target_time);
@@ -99,7 +98,6 @@ void hindmarshrose_objective_loop(HindmarshRose *model, double target_time);
 /**
  * @brief This iterates and simulates the model
  * @param iterations number of iterations
- * @param calculate function to calculate
  *
  */
 void hindmarshrose_iterations_loop(HindmarshRose *model, int iterations);

@@ -43,12 +43,12 @@ int main()
     chaotic_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0);
     hindmarshrose_objective_loop(chaotic_values, 5000.0);
 
-    regular_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR-1], 0.001, ELEMENTS_HR, 
+    regular_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 1], 0.001, ELEMENTS_HR,
                                                 regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 4],
                                                 regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 3],
                                                 regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 2], 3.0, M_VAL, 4.0);
 
-    chaotic_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR-1], 0.001, ELEMENTS_HR,
+    chaotic_values_continue = hindmarshrose_new(regular_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 1], 0.001, ELEMENTS_HR,
                                                 chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 4],
                                                 chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 3],
                                                 chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 2], 3.281, M_VAL, 4.0);

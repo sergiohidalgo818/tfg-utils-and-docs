@@ -15,26 +15,26 @@
 
 int main()
 {
-    const char *filename = "./data/timings_HR/speed_cpp.csv";
+    const char *filename = "./data/timings_syn_HR/speed_cpp.csv";
     FILE *file;
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     HindmarshRoseFastSyn *regular_model = new HindmarshRoseFastSyn(0.01, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron1_cpp.csv",
-                                                                   ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0, 0.1, 0.0002, -0,05);
+                                                                   ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0, 0.02, 0.0002, -0,05);
 
 
 
     HindmarshRoseFastSyn *regular_model2 = new HindmarshRoseFastSyn(0.01, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron2_cpp.csv",
-                                                                    ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0, 0.015, 0.0002, -0,05);
+                                                                    ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0, 0.005, 0.0002, -0,05);
 
 
     HindmarshRoseFastSyn *chaotic_model = new HindmarshRoseFastSyn(0.01, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron1_cpp.csv",
-                                                                   ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0, 0.01, 0.0002, -0,05);
+                                                                   ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0, 0.02, 0.0002, -0,05);
 
 
 
     HindmarshRoseFastSyn *chaotic_model2 = new HindmarshRoseFastSyn(0.01, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron2_cpp.csv",
-                                                                    ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0, 0.015, 0.0002, -0,05);
+                                                                    ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0, 0.005, 0.0002, -0,05);
 
 
 
@@ -71,23 +71,23 @@ int main()
 
     HindmarshRoseFastSyn *regular_model_continue = new HindmarshRoseFastSyn(regular_model->time, 0.01, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron1_continue_cpp.csv",
                                                                    ELEMENTS_HR, regular_model->x, regular_model->y, regular_model->z, 3.0,
-                                                                   M_VAL, 4.0, 0.1, 0.0002, -0,05);
+                                                                   M_VAL, 4.0, 0.02, 0.0002, -0,05);
 
 
     HindmarshRoseFastSyn *regular_model2_continue = new HindmarshRoseFastSyn(regular_model2->time, 0.01, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron2_continue_cpp.csv",
                                                                    ELEMENTS_HR, regular_model2->x, regular_model2->y, regular_model2->z, 3.0,
-                                                                   M_VAL, 4.0, 0.015, 0.0002, -0,05);
+                                                                   M_VAL, 4.0, 0.005, 0.0002, -0,05);
 
 
     HindmarshRoseFastSyn *chaotic_model_continue = new HindmarshRoseFastSyn(chaotic_model->time, 0.01, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron1_continue_cpp.csv",
                                                                    ELEMENTS_HR, chaotic_model->x, chaotic_model->y, chaotic_model->z, 3.281,
-                                                                   M_VAL, 4.0, 0.1, 0.0002, -0,05);
+                                                                   M_VAL, 4.0, 0.02, 0.0002, -0,05);
 
 
 
     HindmarshRoseFastSyn *chaotic_model2_continue = new HindmarshRoseFastSyn(chaotic_model2->time, 0.01, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron2_continue_cpp.csv",
                                                                     ELEMENTS_HR, chaotic_model2->x, chaotic_model2->y, chaotic_model2->z, 3.281,
-                                                                    M_VAL, 4.0, 0.015, 0.0002, -0,05);
+                                                                    M_VAL, 4.0, 0.005, 0.0002, -0,05);
 
 
     int size_second = 20000;

@@ -63,7 +63,15 @@
         "filesystem": "cpp",
         "hindmarshrose.h": "c",
         "bitset": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "optional": "cpp",
+        "__functional_base": "cpp",
+        "__node_handle": "cpp",
+        "__memory": "cpp",
+        "locale": "cpp",
+        "hindmarsh_rose_fast_syn.h": "c",
+        "ranges": "c",
+        "__locale": "c"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }
