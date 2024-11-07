@@ -43,8 +43,15 @@ int main()
     chaotic_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0);
     hindmarshrose_objective_loop(chaotic_values, 5000.0);
 
-    regular_values_continue = hindmarshrose_new(5000, 0.001, ELEMENTS_HR, regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 3], regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 2], regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 1], 3.0, M_VAL, 4.0);
-    chaotic_values_continue = hindmarshrose_new(5000, 0.001, ELEMENTS_HR, chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 3], chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 2], chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 1], 3.0, M_VAL, 4.0);
+    regular_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR-1], 0.001, ELEMENTS_HR, 
+                                                regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 4],
+                                                regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 3],
+                                                regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 2], 3.0, M_VAL, 4.0);
+
+    chaotic_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR-1], 0.001, ELEMENTS_HR,
+                                                chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 4],
+                                                chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 3],
+                                                chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 2], 3.281, M_VAL, 4.0);
 
     hindmarshrose_objective_loop(regular_values_continue, 10000.0);
     hindmarshrose_objective_loop(chaotic_values_continue, 10000.0);
@@ -58,7 +65,7 @@ int main()
     hindmarshrose_write_on_file(regular_values, "./data/executions_HR/c/HR_regular_c.csv");
     hindmarshrose_write_on_file(chaotic_values, "./data/executions_HR/c/HR_chaotic_c.csv");
     hindmarshrose_write_on_file(regular_values_continue, "./data/executions_HR/c/HR_regular_continue_c.csv");
-    hindmarshrose_write_on_file(chaotic_values_continue, "./data/executions_HR/c/HR_chaotic_continue_c.csv" );
+    hindmarshrose_write_on_file(chaotic_values_continue, "./data/executions_HR/c/HR_chaotic_continue_c.csv");
 
     hindmarshrose_free(regular_values);
     hindmarshrose_free(chaotic_values);

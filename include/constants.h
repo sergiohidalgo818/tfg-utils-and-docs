@@ -15,6 +15,6 @@
 #define ELEMENTS_RM 4
 #define DECIMAL_PRECISION 0.00001
 
-#define M_VAL 0.001
+#define M_VAL 0.0021
 
 #endif /* CONSTANTS_H */ 

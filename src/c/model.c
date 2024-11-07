@@ -58,7 +58,6 @@ void model_objective_loop(Model *model, double target_time, void (*calculate)(Mo
 
 
     }
-         printf("-------------------->%d c\n", counter);
 
 }
 

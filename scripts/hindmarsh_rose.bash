@@ -1,6 +1,8 @@
 rm graphs/timings_HR/*
 rm -r graphs/executions_HR/*
 
+rm -r data/executions_HR/*
+
 rm data/timings_HR/*
 make clean
 make main
@@ -10,7 +12,6 @@ echo "compilation DONE";
 for i in $(seq 1 1 5);
 do 
     $(./bin/runner/main_hr_c)
-    $(./bin/runner/main_hr_cpp)
 done
 
 echo "first round DONE";
