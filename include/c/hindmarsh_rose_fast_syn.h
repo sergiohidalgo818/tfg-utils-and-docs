@@ -100,6 +100,13 @@ void hindmarshrosefastsyn_allocate_array_iterations(HindmarshRoseFastSyn *hindma
 
 
 /**
+ * @brief This function allocates the memory of the data array
+ * @param target_time The number of iterations
+ *
+ */
+void hindmarshrosefastsyn_allocate_array_time(HindmarshRoseFastSyn *hindmarshrosefastsyn, double target_time);
+
+/**
  * @brief This function writes on file
  * @param filename The file name
  *

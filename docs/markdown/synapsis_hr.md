@@ -23,16 +23,16 @@ It is also mentioned on the same article that $S_{fast}=0.2mV$ and $V_{fast}=-50
 On the following pages are the graphs for the different simulations:
 
 
-![Simulation regular](images/HR_syn_regular_neuron2_c.png "Simulation regular")
+![Simulation regular](images/HR_syn_regular_cpp.png "Simulation regular")
 
 
 
-![Simulation regular continue](images/HR_syn_regular_neuron2_continue_c.png "Simulation regular continue")
+![Simulation regular continue](images/HR_syn_regular_continue_cpp.png "Simulation regular continue")
 
 
 
-![Simulation regular](images/HR_syn_chaotic_neuron2_c.png "Chaotic regular")
+![Simulation chaotic](images/HR_syn_chaotic_cpp.png "Chaotic regular")
 
 
 
-![Chaotic regular continue](images/HR_syn_chaotic_neuron2_continue_c.png "Chaotic regular continue")
+![Simulation chaotic continue](images/HR_syn_chaotic_continue_cpp.png "Chaotic regular continue")

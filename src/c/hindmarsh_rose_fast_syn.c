@@ -162,3 +162,25 @@ void hindmarshrosefastsyn_allocate_array_iterations(HindmarshRoseFastSyn *hindma
 
     model->data = (float *)malloc(model->data_rows * model->data_cols * sizeof(float));
 }
+
+void hindmarshrosefastsyn_allocate_array_time(HindmarshRoseFastSyn *hindmarshrosefastsyn, double target_time)
+{
+    float *array;
+    int i = 0;
+    Model *model = hindmarshrosefastsyn->hr_model->model;
+    double time = target_time - model->time;
+
+    if (model == NULL || time < 0)
+    {
+        return;
+    }
+
+    model->data_rows = (long)(round(time / model->time_increment));
+
+    if (model->data_rows < 1)
+    {
+        model->data_rows = 1;
+    }
+
+    model->data = (float *)malloc(model->data_rows * model->data_cols * sizeof(float));
+}
