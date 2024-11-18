@@ -29,8 +29,8 @@ int main()
     long regular_lines, regular_lines2, chaotic_lines, chaotic_lines2, regular_lines_continue, regular_lines2_continue, chaotic_lines_continue, chaotic_lines2_continue;
     int i = 0, first_loop = 5000, second_loop = 10000;
     const char *filename = "./data/timings_syn_HR/speed_c.csv";
-    float gsync1 = 0.02, gsync2 = 0.005;
-    float Sfast = 0.2, Esyn = -75, Vfast = -50;
+    float gsync1 = 0.241, gsync2 = 0.186;
+    float Sfast = 0.44, Esyn = -1.92, Vfast = -1.66;
     clock_t clock(void);
     FILE *fptr;
 
@@ -69,9 +69,9 @@ int main()
     end_function = end_function / CLOCKS_PER_SEC;
 
     chaotic_values = hindmarshrosefastsyn_new(0, 0.001, ELEMENTS_HR,
-                                              regular_stationary->x,
-                                              regular_stationary->y,
-                                              regular_stationary->z,
+                                              chaotic_stationary->x,
+                                              chaotic_stationary->y,
+                                              chaotic_stationary->z,
                                               3.281, M_VAL, 4.0, gsync1, Sfast, Esyn, Vfast);
 
     chaotic_values2 = hindmarshrosefastsyn_new(0, 0.001, ELEMENTS_HR,
@@ -87,8 +87,8 @@ int main()
     while ((first_loop - chaotic_values->hr_model->model->time) > DECIMAL_PRECISION)
     {
 
-        hindmarshrosefastsyn_calculate(chaotic_values, i, regular_values2->hr_model->x);
-        hindmarshrosefastsyn_calculate(chaotic_values2, i, regular_values->hr_model->x);
+        hindmarshrosefastsyn_calculate(chaotic_values, i, chaotic_values2->hr_model->x);
+        hindmarshrosefastsyn_calculate(chaotic_values2, i, chaotic_values->hr_model->x);
         i++;
     }
 
@@ -96,25 +96,25 @@ int main()
                                                        regular_values->hr_model->x,
                                                        regular_values->hr_model->y,
                                                        regular_values->hr_model->z,
-                                                       3.0, M_VAL, 4.0, gsync1, Sfast, -0, 05);
+                                                       3.0, M_VAL, 4.0, gsync1, Sfast, Esyn, Vfast);
 
     regular_values2_continue = hindmarshrosefastsyn_new(regular_values2->hr_model->model->time, 0.001, ELEMENTS_HR,
                                                         regular_values2->hr_model->x,
                                                         regular_values2->hr_model->y,
                                                         regular_values2->hr_model->z,
-                                                        3.0, M_VAL, 4.0, gsync2, Sfast, -0, 05);
+                                                        3.0, M_VAL, 4.0, gsync2, Sfast, Esyn, Vfast);
 
     chaotic_values_continue = hindmarshrosefastsyn_new(chaotic_values->hr_model->model->time, 0.001, ELEMENTS_HR,
                                                        chaotic_values->hr_model->x,
                                                        chaotic_values->hr_model->y,
                                                        chaotic_values->hr_model->z,
-                                                       3.281, M_VAL, 4.0, gsync1, Sfast, -0, 05);
+                                                       3.281, M_VAL, 4.0, gsync1, Sfast, Esyn, Vfast);
 
     chaotic_values2_continue = hindmarshrosefastsyn_new(chaotic_values2->hr_model->model->time, 0.001, ELEMENTS_HR,
                                                         chaotic_values2->hr_model->x,
                                                         chaotic_values2->hr_model->y,
                                                         chaotic_values2->hr_model->z,
-                                                        3.281, M_VAL, 4.0, gsync2, Sfast, -0, 05);
+                                                        3.281, M_VAL, 4.0, gsync2, Sfast, Esyn, Vfast);
 
     hindmarshrosefastsyn_allocate_array_time(regular_values_continue, second_loop);
     hindmarshrosefastsyn_allocate_array_time(regular_values2_continue, second_loop);

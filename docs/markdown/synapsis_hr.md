@@ -3,36 +3,40 @@
 By Sergio Hidalgo
 
 ## Index
-- [Introduction](#introduction)
-- [Parameters](#parameters)
-- [Graphs](#graphs)
+- [Fast Synapsis Hindmarsh-Rose](#fast-synapsis-hindmarsh-rose)
+  - [Index](#index)
+  - [Introduction](#introduction)
+  - [Parameters](#parameters)
+  - [Graphs](#graphs)
 
 
 ## Introduction
-This document shows the results from two programs that simulates the fast synapis between two Hindmarsh-Rose neurons
+This document shows the results from two programs that simulates the fast synapis between two Hindmarsh-Rose neurons.
 
 ## Parameters
-The parameters choosed are inspired on the article [Network Stability from Activity-Dependent Regulation of Neuronal Conductances](https://direct.mit.edu/neco/article-abstract/11/5/1079/6277/Network-Stability-from-Activity-Dependent?redirectedFrom=fulltext)
+The parameters choosed are based on the file *"pract3-15.pdf"* inside the directory **`resources/`**.
 
-The **Table 3** of the article shows the values of maximal conductance, and we can see that *LP* neuron and *PY* neuron have a both values between them. 
-So neuron1 will be *LP* and neuron2 *PY*, being $gfast_{1}=0.02$ and $gfast_{2}=0.005$.
+The values $S_{fast}=0.44$, $V_{fast}=-1.66$, $E_{syn}=-1.92$ for Hindmarsh-Rose synapsis, are obtained from **Table 2**.
 
-It is also mentioned on the same article that $S_{fast}=0.2mV$ and $V_{fast}=-50mV$, this values (passed to V) are equal to $S_{fast}=0.0002mV$ and $V_{fast}=-0.05mV$.
+The **Table 3** of the document shows the values of maximal conductance, and we can see that *LP* neuron and *PY* neuron have a both values between them. 
+So neuron1 will be *LP* and neuron2 *PY*, being $gfast_{1}=0.241$ and $gfast_{2}=0.186$.
+
+The rest of the values ($time increment$, $x_{initial}$, $e$, $m$ and $S$) for the model, are the same used on the part 2 of the same document.
 
 ## Graphs
 On the following pages are the graphs for the different simulations:
 
 
-![Simulation regular](images/HR_syn_regular_cpp.png "Simulation regular")
+![Simulation regular](images/HR_syn_regular_c.png "Simulation regular")
 
 
 
-![Simulation regular continue](images/HR_syn_regular_continue_cpp.png "Simulation regular continue")
+![Simulation regular continue](images/HR_syn_regular_continue_c.png "Simulation regular continue")
 
 
 
-![Simulation chaotic](images/HR_syn_chaotic_cpp.png "Chaotic regular")
+![Simulation chaotic](images/HR_syn_chaotic_c.png "Chaotic regular")
 
 
 
-![Simulation chaotic continue](images/HR_syn_chaotic_continue_cpp.png "Chaotic regular continue")
+![Simulation chaotic continue](images/HR_syn_chaotic_continue_c.png "Chaotic regular continue")

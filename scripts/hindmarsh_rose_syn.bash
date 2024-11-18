@@ -8,8 +8,8 @@ make main
 
 echo "compilation DONE";
 
-$(./bin/runner/main_syn_hr_cpp)
-#$(./bin/runner/main_syn_hr_c)
+# $(./bin/runner/main_syn_hr_cpp)
+$(./bin/runner/main_syn_hr_c)
 
 
 echo "execution DONE";
