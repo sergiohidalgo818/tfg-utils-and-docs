@@ -33,6 +33,7 @@ int main()
     float Sfast = 0.44, Esyn = -1.92, Vfast = -1.66;
     clock_t clock(void);
     FILE *fptr;
+    float aux = 0;
 
     start = (double)clock();
     start = start / CLOCKS_PER_SEC;
@@ -60,8 +61,9 @@ int main()
 
     while ((first_loop - regular_values->hr_model->model->time) > DECIMAL_PRECISION)
     {
+        aux = regular_values->hr_model->x;
         hindmarshrosefastsyn_calculate(regular_values, i, regular_values2->hr_model->x);
-        hindmarshrosefastsyn_calculate(regular_values2, i, regular_values->hr_model->x);
+        hindmarshrosefastsyn_calculate(regular_values2, i, aux);
         i++;
     }
 
@@ -87,8 +89,9 @@ int main()
     while ((first_loop - chaotic_values->hr_model->model->time) > DECIMAL_PRECISION)
     {
 
+        aux = chaotic_values->hr_model->x;
         hindmarshrosefastsyn_calculate(chaotic_values, i, chaotic_values2->hr_model->x);
-        hindmarshrosefastsyn_calculate(chaotic_values2, i, chaotic_values->hr_model->x);
+        hindmarshrosefastsyn_calculate(chaotic_values2, i, aux);
         i++;
     }
 
@@ -125,11 +128,13 @@ int main()
     while ((second_loop - regular_values_continue->hr_model->model->time) > DECIMAL_PRECISION)
     {
 
+        aux = regular_values_continue->hr_model->x;
         hindmarshrosefastsyn_calculate(regular_values_continue, i, regular_values2_continue->hr_model->x);
-        hindmarshrosefastsyn_calculate(regular_values2_continue, i, regular_values_continue->hr_model->x);
+        hindmarshrosefastsyn_calculate(regular_values2_continue, i, aux);
 
+        aux = chaotic_values_continue->hr_model->x;
         hindmarshrosefastsyn_calculate(chaotic_values_continue, i, chaotic_values2_continue->hr_model->x);
-        hindmarshrosefastsyn_calculate(chaotic_values2_continue, i, chaotic_values_continue->hr_model->x);
+        hindmarshrosefastsyn_calculate(chaotic_values2_continue, i, aux);
         i++;
     }
 

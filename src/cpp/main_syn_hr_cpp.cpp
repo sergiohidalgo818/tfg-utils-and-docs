@@ -28,11 +28,11 @@ int main()
     HindmarshRose *regular_stationary = new HindmarshRose(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron1_cpp.csv",
                                                           ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0);
 
-    HindmarshRose *regular_stationary2 = new HindmarshRose(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron2_cpp.csv",
-                                                           ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0);
+    HindmarshRose *chaotic_stationary = new HindmarshRose(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron2_cpp.csv",
+                                                           ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0);
 
     regular_stationary->objective_loop(5000);
-    regular_stationary2->objective_loop(5000);
+    chaotic_stationary->objective_loop(5000);
 
     HindmarshRoseFastSyn *regular_model = new HindmarshRoseFastSyn(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_regular_neuron1_cpp.csv",
                                                                    ELEMENTS_HR, regular_stationary->x, regular_stationary->y, regular_stationary->z,
@@ -43,11 +43,11 @@ int main()
                                                                     3.0, M_VAL, 4.0, gsync2, Sfast, Esyn, Vfast);
 
     HindmarshRoseFastSyn *chaotic_model = new HindmarshRoseFastSyn(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron1_cpp.csv",
-                                                                   ELEMENTS_HR, regular_stationary->x, regular_stationary->y, regular_stationary->z,
+                                                                   ELEMENTS_HR, chaotic_stationary->x, chaotic_stationary->y, chaotic_stationary->z,
                                                                    3.281, M_VAL, 4.0, gsync1, Sfast, Esyn, Vfast);
 
     HindmarshRoseFastSyn *chaotic_model2 = new HindmarshRoseFastSyn(0, 0.001, "./data/executions_HR_syn/cpp/HR_syn_chaotic_neuron2_cpp.csv",
-                                                                    ELEMENTS_HR, regular_stationary->x, regular_stationary->y, regular_stationary->z,
+                                                                    ELEMENTS_HR, chaotic_stationary->x, chaotic_stationary->y, chaotic_stationary->z,
                                                                     3.281, M_VAL, 4.0, gsync2, Sfast, Esyn, Vfast);
 
     regular_model->allocate_array(0, first_loop);
@@ -132,7 +132,7 @@ int main()
     std::chrono::steady_clock::time_point end_writing_operations = std::chrono::steady_clock::now();
 
     regular_stationary->free();
-    regular_stationary2->free();
+    chaotic_stationary->free();
 
     regular_model->free();
     regular_model2->free();
