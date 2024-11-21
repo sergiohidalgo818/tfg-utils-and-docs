@@ -118,10 +118,10 @@ void hindmarshrosefastsyn_calculate(HindmarshRoseFastSyn *hindmarshrosefastsyn, 
 
     Isyn = (hindmarshrosefastsyn->gfast * (actual_model->x - hindmarshrosefastsyn->Esyn)) / (1 + exp(hindmarshrosefastsyn->Sfast * (hindmarshrosefastsyn->Vfast - Vspre)));
 
-
-    aux_x = actual_model->x + model->time_increment * (actual_model->y + 3 * actual_model->x * actual_model->x - actual_model->x * actual_model->x * actual_model->x - actual_model->z + actual_model->e+ Isyn);
-    aux_y = actual_model->y + model->time_increment * (1 - 5 * actual_model->x * actual_model->x - actual_model->y+ Isyn);
-    aux_z = actual_model->z + model->time_increment * actual_model->m * (-actual_model->z + actual_model->S * (actual_model->x + 1.6)+ Isyn);
+    /* Check Isyn (should be negative)*/
+    aux_x = actual_model->x + model->time_increment * (actual_model->y + 3 * actual_model->x * actual_model->x - actual_model->x * actual_model->x * actual_model->x - actual_model->z + actual_model->e- Isyn);
+    aux_y = actual_model->y + model->time_increment * (1 - 5 * actual_model->x * actual_model->x - actual_model->y);
+    aux_z = actual_model->z + model->time_increment * actual_model->m * (-actual_model->z + actual_model->S * (actual_model->x + 1.6));
 
     actual_model->x = aux_x;
     actual_model->y = aux_y;
