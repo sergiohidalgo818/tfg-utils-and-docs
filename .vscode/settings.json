@@ -71,7 +71,9 @@
         "locale": "cpp",
         "hindmarsh_rose_fast_syn.h": "c",
         "ranges": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "math.h": "c",
+        "time.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }

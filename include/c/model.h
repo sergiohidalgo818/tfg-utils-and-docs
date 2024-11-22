@@ -67,7 +67,7 @@ void model_allocate_array_iterations(Model *model, int iterations);
  * @param file_name the name of the file
  *
  */
-void model_write_on_file(Model *model, const char *file_name, const char *header_of_file);
+void model_write_on_file(Model *model, const char *file_name, const char *header_of_file, int save_every);
 
 /**
  * @brief This function frees the memory of the model

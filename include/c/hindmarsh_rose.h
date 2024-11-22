@@ -31,8 +31,9 @@ typedef struct _HindmarshRose
     float y;
     float z;
     float e;
-    float S;
     float m;
+    float S;
+    float v;
     StationaryMode mode;
     Model *model;
 }HindmarshRose;
@@ -47,10 +48,11 @@ typedef struct _HindmarshRose
  * @param e value of the e constant (> 3.0  is chaotic)
  * @param m value of the m constant
  * @param S value of the S constant
+ * @param v value of the v constant
  *
  * @return Returns the array of values.
  */
-HindmarshRose *hindmarshrose_new_yz( double start_time, double time_increment, int elements_in_model,float initial_x, float e, float m, float S);
+HindmarshRose *hindmarshrose_new_yz( double start_time, double time_increment, int elements_in_model,float initial_x, float e, float m, float S, float v);
 
 /**
  * @brief This function simulates the hindmarsh rose model, z and y are stationary.
@@ -63,10 +65,11 @@ HindmarshRose *hindmarshrose_new_yz( double start_time, double time_increment, i
  * @param e value of the e constant (> 3.0  is chaotic)
  * @param m value of the m constant
  * @param S value of the S constant
+ * @param v value of the v constant
  *
  * @return Returns the array of values.
  */
-HindmarshRose *hindmarshrose_new_y_or_z( double start_time,double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode);
+HindmarshRose *hindmarshrose_new_y_or_z( double start_time,double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, float v, StationaryMode mode);
 
 
 
@@ -81,10 +84,11 @@ HindmarshRose *hindmarshrose_new_y_or_z( double start_time,double time_increment
  * @param e value of the e constant (> 3.0  is chaotic)
  * @param m value of the m constant
  * @param S value of the S constant
+ * @param v value of the v constant
  *
  * @return Returns the array of values.
  */
-HindmarshRose *hindmarshrose_new( double start_time, double time_increment,  int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S);
+HindmarshRose *hindmarshrose_new( double start_time, double time_increment,  int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S, float v);
 
 
 /**
@@ -108,7 +112,7 @@ void hindmarshrose_iterations_loop(HindmarshRose *model, int iterations);
  * @param filename the name of the file
  *
  */
-void hindmarshrose_write_on_file(HindmarshRose *hindmarshrose, const char* filename);
+void hindmarshrose_write_on_file(HindmarshRose *hindmarshrose, const char* filename, int save_every);
 
 /**
  * @brief This function frees the memory of the hindmarshrose model

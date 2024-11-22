@@ -27,34 +27,35 @@ int main()
     double start, end_function, end_all_functions, end_writing_operations, end;
     double regular_time, chaotic_time, regular_time_continue, chaotic_time_continue;
     long regular_lines, chaotic_lines, regular_lines_continue, chaotic_lines_continue;
-    int i = 0;
+    int i = 0, save_every = 100;
     const char *filename = "./data/timings_HR/speed_c.csv";
-
+    float e=3.0, e_chaotic=3.281,S = 1.0, v =0.1;
+    float loop_1 = 10000.0, loop_continue = 20000.0;
     clock_t clock(void);
     FILE *fptr;
 
     start = (double)clock();
     start = start / CLOCKS_PER_SEC;
-    regular_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, 3.0, M_VAL, 4.0);
-    hindmarshrose_objective_loop(regular_values, 5000.0);
+    regular_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, e, M_VAL, S, v);
+    hindmarshrose_objective_loop(regular_values, loop_1);
     end_function = (double)clock();
     end_function = end_function / CLOCKS_PER_SEC;
 
-    chaotic_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, 3.281, M_VAL, 4.0);
-    hindmarshrose_objective_loop(chaotic_values, 5000.0);
+    chaotic_values = hindmarshrose_new_yz(0, 0.001, ELEMENTS_HR, -1.3, e_chaotic, M_VAL, S, v);
+    hindmarshrose_objective_loop(chaotic_values, loop_1);
 
     regular_values_continue = hindmarshrose_new(regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 1], 0.001, ELEMENTS_HR,
                                                 regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 4],
                                                 regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 3],
-                                                regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 2], 3.0, M_VAL, 4.0);
+                                                regular_values->model->data[regular_values->model->data_rows * ELEMENTS_HR - 2], e, M_VAL, S, v);
 
     chaotic_values_continue = hindmarshrose_new(regular_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 1], 0.001, ELEMENTS_HR,
                                                 chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 4],
                                                 chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 3],
-                                                chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 2], 3.281, M_VAL, 4.0);
+                                                chaotic_values->model->data[chaotic_values->model->data_rows * ELEMENTS_HR - 2], e_chaotic, M_VAL, S, v);
 
-    hindmarshrose_objective_loop(regular_values_continue, 10000.0);
-    hindmarshrose_objective_loop(chaotic_values_continue, 10000.0);
+    hindmarshrose_objective_loop(regular_values_continue, loop_continue);
+    hindmarshrose_objective_loop(chaotic_values_continue, loop_continue);
 
     end_all_functions = (double)clock();
     end_all_functions = end_all_functions / CLOCKS_PER_SEC;
@@ -62,10 +63,10 @@ int main()
     end_writing_operations = (double)clock();
     end_writing_operations = end_writing_operations / CLOCKS_PER_SEC;
 
-    hindmarshrose_write_on_file(regular_values, "./data/executions_HR/c/HR_regular_c.csv");
-    hindmarshrose_write_on_file(chaotic_values, "./data/executions_HR/c/HR_chaotic_c.csv");
-    hindmarshrose_write_on_file(regular_values_continue, "./data/executions_HR/c/HR_regular_continue_c.csv");
-    hindmarshrose_write_on_file(chaotic_values_continue, "./data/executions_HR/c/HR_chaotic_continue_c.csv");
+    hindmarshrose_write_on_file(regular_values, "./data/executions_HR/c/HR_regular_c.csv", save_every);
+    hindmarshrose_write_on_file(chaotic_values, "./data/executions_HR/c/HR_chaotic_c.csv", save_every);
+    hindmarshrose_write_on_file(regular_values_continue, "./data/executions_HR/c/HR_regular_continue_c.csv", save_every);
+    hindmarshrose_write_on_file(chaotic_values_continue, "./data/executions_HR/c/HR_chaotic_continue_c.csv", save_every);
 
     hindmarshrose_free(regular_values);
     hindmarshrose_free(chaotic_values);

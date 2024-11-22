@@ -18,7 +18,6 @@ def plot_model_data(directory:str, filename:str, type_model:str):
 
     plt.plot( data_frame["time"], data_frame["x"]) 
     plt.xlim((data_frame['time'].min(), data_frame['time'].max()))
-    plt.ylim((-1.5, 2.5))
     
     name = filename.split('.')[0]
 

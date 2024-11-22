@@ -1,3 +1,4 @@
+#!/bin/bash
 rm -r graphs/executions_HR_syn/*
 rm -r data/executions_HR_syn/*
 

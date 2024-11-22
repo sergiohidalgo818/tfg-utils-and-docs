@@ -134,7 +134,7 @@ void rulkovmap_iterations_loop(RulkovMap *rulkovmap, int iterations)
 
 void rulkovmap_write_on_file(RulkovMap *rulkovmap, const char *filename)
 {
-    model_write_on_file(rulkovmap->model,  filename, "x;y;o;time\n");
+    model_write_on_file(rulkovmap->model,  filename, "x;y;o;time\n", 1);
 }
 
 void rulkovmap_free(RulkovMap *rulkovmap)

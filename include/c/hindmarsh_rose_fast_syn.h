@@ -41,7 +41,7 @@ typedef struct _HindmarshRoseFastSyn
  * 
  * @return Returns the array of values.
  */
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time_increment, int elements_in_model, float initial_x, float e, float m, float S, float gfast, float Sfast, float Esyn, float Vfast);
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time_increment, int elements_in_model, float initial_x, float e, float m, float S, float v, float gfast, float Sfast, float Esyn, float Vfast);
 
 /**
  * @brief This function simulates the hindmarsh rose model, z and y are stationary.
@@ -61,7 +61,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time
  * 
  * @return Returns the array of values.
  */
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode, float gfast, float Sfast, float Esyn, float Vfast);
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, float v, StationaryMode mode, float gfast, float Sfast, float Esyn, float Vfast);
 
 /**
  * @brief This function simulates the hindmarsh rose model
@@ -81,7 +81,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double 
  * 
  * @return Returns the array of values.
  */
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S, float gfast, float Sfast, float Esyn, float Vfast);
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S, float v, float gfast, float Sfast, float Esyn, float Vfast);
 
 /**
  * @brief This function calculates t + t_increment on the model.
@@ -111,7 +111,7 @@ void hindmarshrosefastsyn_allocate_array_time(HindmarshRoseFastSyn *hindmarshros
  * @param filename The file name
  *
  */
-void hindmarshrosefastsyn_write_on_file(HindmarshRoseFastSyn *hindmarshrose, const char *filename);
+void hindmarshrosefastsyn_write_on_file(HindmarshRoseFastSyn *hindmarshrose, const char *filename, int save_every);
 
 /**
  * @brief This function frees the memory of the hindmarshrose model

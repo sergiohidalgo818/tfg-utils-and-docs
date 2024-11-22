@@ -1,4 +1,4 @@
-
+#!/bin/bash
 rm graphs/timings_RM/*
 rm -r graphs/executions_RM/*
 rm data/timings_MR/*

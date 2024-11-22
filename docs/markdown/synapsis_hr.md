@@ -27,16 +27,16 @@ The rest of the values ($time increment$, $x_{initial}$, $e$, $m$ and $S$) for t
 On the following pages are the graphs for the different simulations:
 
 
-![Simulation regular](images/HR_syn_regular_c.png "Simulation regular")
+![Simulation regular](images/synapsis_hr/HR_syn_regular_c.png "Simulation regular")
 
 
 
-![Simulation regular continue](images/HR_syn_regular_continue_c.png "Simulation regular continue")
+![Simulation regular continue](images/synapsis_hr/HR_syn_regular_continue_c.png "Simulation regular continue")
 
 
 
-![Simulation chaotic](images/HR_syn_chaotic_c.png "Chaotic regular")
+![Simulation chaotic](images/synapsis_hr/HR_syn_chaotic_c.png "Chaotic regular")
 
 
 
-![Simulation chaotic continue](images/HR_syn_chaotic_continue_c.png "Chaotic regular continue")
+![Simulation chaotic continue](images/synapsis_hr/HR_syn_chaotic_continue_c.png "Chaotic regular continue")

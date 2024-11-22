@@ -14,7 +14,7 @@
 #include <math.h>
 
 
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S, float gfast, float Sfast, float Esyn, float Vfast)
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_y, float initial_z, float e, float m, float S, float v, float gfast, float Sfast, float Esyn, float Vfast)
 {
     HindmarshRoseFastSyn *hindmarshrosefastsyn;
     int i = 0, j = 0;
@@ -29,7 +29,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_in
     {
         return NULL;
     }
-    hindmarshrosefastsyn->hr_model = hindmarshrose_new(start_time, time_increment, elements_in_model, initial_x, initial_y, initial_z, e, m, S);
+    hindmarshrosefastsyn->hr_model = hindmarshrose_new(start_time, time_increment, elements_in_model, initial_x, initial_y, initial_z, e, m, S, v);
 
     if (hindmarshrosefastsyn->hr_model == NULL)
     {
@@ -44,7 +44,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new(double start_time, double time_in
     return hindmarshrosefastsyn;
 }
 
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, StationaryMode mode, float gfast, float Sfast, float Esyn, float Vfast)
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double time_increment, int elements_in_model, float initial_x, float initial_yz, float e, float m, float S, float v, StationaryMode mode, float gfast, float Sfast, float Esyn, float Vfast)
 {
     HindmarshRoseFastSyn *hindmarshrosefastsyn;
     int i = 0, j = 0;
@@ -59,7 +59,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double 
     {
         return NULL;
     }
-    hindmarshrosefastsyn->hr_model = hindmarshrose_new_y_or_z(start_time, time_increment, elements_in_model, initial_x, initial_yz, e, m, S, mode);
+    hindmarshrosefastsyn->hr_model = hindmarshrose_new_y_or_z(start_time, time_increment, elements_in_model, initial_x, initial_yz, e, m, S, v, mode);
 
     if (hindmarshrosefastsyn->hr_model == NULL)
     {
@@ -74,7 +74,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new_y_or_z(double start_time, double 
     return hindmarshrosefastsyn;
 }
 
-HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time_increment, int elements_in_model, float initial_x, float e, float m, float S, float gfast, float Sfast, float Esyn, float Vfast)
+HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time_increment, int elements_in_model, float initial_x, float e, float m, float S, float v, float gfast, float Sfast, float Esyn, float Vfast)
 {
     HindmarshRoseFastSyn *hindmarshrosefastsyn;
     int i = 0, j = 0;
@@ -89,7 +89,7 @@ HindmarshRoseFastSyn *hindmarshrosefastsyn_new_yz(double start_time, double time
     {
         return NULL;
     }
-    hindmarshrosefastsyn->hr_model = hindmarshrose_new_yz(start_time, time_increment, elements_in_model, initial_x, e, m, S);
+    hindmarshrosefastsyn->hr_model = hindmarshrose_new_yz(start_time, time_increment, elements_in_model, initial_x, e, m, S, v);
 
     if (hindmarshrosefastsyn->hr_model == NULL)
     {
@@ -118,10 +118,10 @@ void hindmarshrosefastsyn_calculate(HindmarshRoseFastSyn *hindmarshrosefastsyn, 
 
     Isyn = (hindmarshrosefastsyn->gfast * (actual_model->x - hindmarshrosefastsyn->Esyn)) / (1 + exp(hindmarshrosefastsyn->Sfast * (hindmarshrosefastsyn->Vfast - Vspre)));
 
-    /* Check Isyn (should be negative)*/
-    aux_x = actual_model->x + model->time_increment * (actual_model->y + 3 * actual_model->x * actual_model->x - actual_model->x * actual_model->x * actual_model->x - actual_model->z + actual_model->e- Isyn);
+
+    aux_x = actual_model->x + model->time_increment * (actual_model->y + 3 * actual_model->x * actual_model->x - actual_model->x * actual_model->x * actual_model->x - actual_model->z + actual_model->e + Isyn);
     aux_y = actual_model->y + model->time_increment * (1 - 5 * actual_model->x * actual_model->x - actual_model->y);
-    aux_z = actual_model->z + model->time_increment * actual_model->m * (-actual_model->z + actual_model->S * (actual_model->x + 1.6));
+    aux_z = actual_model->z+ model->time_increment * actual_model->m * (-actual_model->v *actual_model->z + actual_model->S * (actual_model->x + 1.6));
 
     actual_model->x = aux_x;
     actual_model->y = aux_y;
@@ -130,9 +130,9 @@ void hindmarshrosefastsyn_calculate(HindmarshRoseFastSyn *hindmarshrosefastsyn, 
     model->time = model->time + model->time_increment;
 }
 
-void hindmarshrosefastsyn_write_on_file(HindmarshRoseFastSyn *hindmarshrosefastsyn, const char *filename)
+void hindmarshrosefastsyn_write_on_file(HindmarshRoseFastSyn *hindmarshrosefastsyn, const char *filename, int save_every)
 {
-    hindmarshrose_write_on_file(hindmarshrosefastsyn->hr_model,  filename);
+    hindmarshrose_write_on_file(hindmarshrosefastsyn->hr_model,  filename, save_every);
 }
 
 void hindmarshrosefastsyn_free(HindmarshRoseFastSyn *hindmarshrosefastsyn)

@@ -109,7 +109,7 @@ void model_allocate_array_iterations(Model *model, int iterations)
     model->data = (float *)malloc(model->data_rows * model->data_cols * sizeof(float));
 }
 
-void model_write_on_file(Model *model,  const char *file_name, const char *header_of_file)
+void model_write_on_file(Model *model,  const char *file_name, const char *header_of_file, int save_every)
 {
     FILE *fptr = NULL;
     int i = 0, j = 0, len = 0;
@@ -123,7 +123,7 @@ void model_write_on_file(Model *model,  const char *file_name, const char *heade
     }
     fputs(header_of_file, fptr);
 
-    for (i = 0; i < model->data_rows * model->data_cols; i += j)
+    for (i = 0; i < model->data_rows * model->data_cols; i = i+ j*save_every)
     {
 
         for (j = 0; j < model->data_cols; j++)
