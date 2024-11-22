@@ -115,7 +115,7 @@ New chaotic synapsis simulation         |  New chaotic synapsis simulation conti
 
 Here the synapis was calculated over $x$ variable with negative presynaptic current: 
 $$
-x(t+1)=x+\Delta t(y(t)+3x^{3}(t)-x^{2}(t)-z(t)-e-I_{syn})
+x(t+1)=x+\Delta t(y(t)+3x^{3}(t)-x^{2}(t)-z(t)+e-I_{syn})
 $$
 
 
@@ -151,7 +151,7 @@ New chaotic synapsis simulation         |  New chaotic synapsis simulation conti
 
 Here the synapis was calculated over $x$, $y$ and $z$ variables with positive presynaptic current: 
 $$
-x(t+1)=x(t)+\Delta t(y(t)+3x^{3}(t)-x^{2}(t)-z(t)-e+I_{syn})
+x(t+1)=x(t)+\Delta t(y(t)+3x^{3}(t)-x^{2}(t)-z(t)+e+I_{syn})
 $$
 $$
 y(t+1)=y(t)+\Delta t(1 - 5 x^{2} - y(t) + I_{syn})

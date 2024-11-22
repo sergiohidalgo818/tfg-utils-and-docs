@@ -30,7 +30,7 @@ int main()
     double start, end_function, end_all_functions, end_writing_operations, end;
     int i = 0, j = 0, save_every = 100;
     const char *filename = "./data/timings_HR/speed_c.csv";
-    float e = 3.0, e_chaotic = 3.281, S = 1.0, v = 0.1;
+    float e = 3.0, e_chaotic = 3.281, S = 3.0, v = 0.1;
     float loop_1 = 10000.0, loop_continue = 20000.0;
     float start_time = 0.0, time_increment = 0.001, initial_x = -1.3;
     float aux_x, aux_y, aux_z;
@@ -48,7 +48,8 @@ int main()
 
     /* regular_values initialization */
     float regular_values_x = initial_x, regular_values_y = 0.0, regular_values_z = 0.0, *regular_values_array;
-    double regular_values_time = 0.0, regular_values_data_rows = 0;
+    double regular_values_time = 0.0;
+    int regular_values_data_rows = 0;
 
     if (time_increment < 0 || ELEMENTS_HR < 1)
     {
@@ -85,7 +86,7 @@ int main()
 
         aux_x = regular_values_x + time_increment * (regular_values_y + 3 * regular_values_x * regular_values_x - regular_values_x * regular_values_x * regular_values_x - regular_values_z + e);
         aux_y = regular_values_y + time_increment * (1 - 5 * regular_values_x * regular_values_x - regular_values_y);
-        aux_z = regular_values_z + time_increment * M_VAL * (v * regular_values_z + S * (regular_values_x + 1.6));
+        aux_z = regular_values_z + time_increment * M_VAL * (-v * regular_values_z + S * (regular_values_x + 1.6));
 //   printf("\n%lf == %lf\t%lf == %lf\t%lf == %lf\t%lf == %lf\n",
 //         regular_values_array[i * ELEMENTS_HR], regular_values_x,
 //         regular_values_array[i * ELEMENTS_HR +1], regular_values_y,
@@ -141,7 +142,7 @@ int main()
 
         aux_x = chaotic_values_x + time_increment * (chaotic_values_y + 3 * chaotic_values_x * chaotic_values_x - chaotic_values_x * chaotic_values_x * chaotic_values_x - chaotic_values_z + e_chaotic);
         aux_y = chaotic_values_y + time_increment * (1 - 5 * chaotic_values_x * chaotic_values_x - chaotic_values_y);
-        aux_z = chaotic_values_z + time_increment * M_VAL * (v * chaotic_values_z + S * (chaotic_values_x + 1.6));
+        aux_z = chaotic_values_z + time_increment * M_VAL * (-v * chaotic_values_z + S * (chaotic_values_x + 1.6));
 
         chaotic_values_x = aux_x;
         chaotic_values_y = aux_y;
@@ -155,7 +156,8 @@ int main()
 
     /* regular_values_continue initialization */
     float regular_values_continue_x = regular_values_x, regular_values_continue_y = regular_values_y, regular_values_continue_z = regular_values_z, *regular_values_continue_array;
-    double  regular_values_continue_time = regular_values_time, regular_values_continue_data_rows = 0;
+    double  regular_values_continue_time = regular_values_time;
+    int regular_values_continue_data_rows = 0;
 
     if (time_increment < 0 || ELEMENTS_HR < 1)
     {
@@ -190,7 +192,7 @@ int main()
 
         aux_x = regular_values_continue_x + time_increment * (regular_values_continue_y + 3 * regular_values_continue_x * regular_values_continue_x - regular_values_continue_x * regular_values_continue_x * regular_values_continue_x - regular_values_continue_z + e);
         aux_y = regular_values_continue_y + time_increment * (1 - 5 * regular_values_continue_x * regular_values_continue_x - regular_values_continue_y);
-        aux_z = regular_values_continue_z + time_increment * M_VAL * (v * regular_values_continue_z + S * (regular_values_continue_x + 1.6));
+        aux_z = regular_values_continue_z + time_increment * M_VAL * (-v * regular_values_continue_z + S * (regular_values_continue_x + 1.6));
 
         regular_values_continue_x = aux_x;
         regular_values_continue_y = aux_y;
@@ -240,7 +242,7 @@ int main()
 
         aux_x = chaotic_values_continue_x + time_increment * (chaotic_values_continue_y + 3 * chaotic_values_continue_x * chaotic_values_continue_x - chaotic_values_continue_x * chaotic_values_continue_x * chaotic_values_continue_x - chaotic_values_continue_z + e_chaotic);
         aux_y = chaotic_values_continue_y + time_increment * (1 - 5 * chaotic_values_continue_x * chaotic_values_continue_x - chaotic_values_continue_y);
-        aux_z = chaotic_values_continue_z + time_increment * M_VAL * (v * chaotic_values_continue_z + S * (chaotic_values_continue_x + 1.6));
+        aux_z = chaotic_values_continue_z + time_increment * M_VAL * (-v * chaotic_values_continue_z + S * (chaotic_values_continue_x + 1.6));
 
         chaotic_values_continue_x = aux_x;
         chaotic_values_continue_y = aux_y;
