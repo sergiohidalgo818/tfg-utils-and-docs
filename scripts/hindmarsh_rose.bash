@@ -14,8 +14,8 @@ echo "compilation DONE";
 # do 
 #     $(./bin/runner/maicn_hr_c)
 # done
-    # $(./bin/runner/main_hr_c)
-    $(./bin/runner/unrolled_hr_c)
+    $(./bin/runner/main_hr_c)
+    # $(./bin/runner/unrolled_hr_c)
 echo "first round DONE";
 
 

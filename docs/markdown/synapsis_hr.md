@@ -3,12 +3,9 @@
 By Sergio Hidalgo
 
 ## Index
-- [Fast Synapsis Hindmarsh-Rose](#fast-synapsis-hindmarsh-rose)
-  - [Index](#index)
   - [Introduction](#introduction)
   - [Parameters](#parameters)
   - [Graphs](#graphs)
-
 
 ## Introduction
 This document shows the results from two programs that simulates the fast synapis between two Hindmarsh-Rose neurons.
