@@ -31,20 +31,75 @@ def detect_points(data:np.ndarray)->tuple:
         # dx = y_act + 3*(x_act**2) - x_act**3 - z_act + e
 
 
-        t_act = t_next
-        x_act = x_next
-            
 
         if sign_flag:
             dx_sign = np.sign([dx])[0]
             sign_list.append(-dx_sign)
             sign_flag = False
         
-        # if abs(dx) -0.3 <= 0:
-        if abs(dx) -0.0001 <= 0:
+        # if dx<0:
+        #     dx*=-1.0
+
+        # if dx -0.03 <= 0:
+
+
+        if dx  == 0:
             sign_flag = True
-            d_location.append(i)
+            d_location.append(i-1)
         
+        t_act = t_next
+        x_act = x_next
+            
+    return (d_location, sign_list)
+
+def detect_points_for_time(data:np.ndarray)->tuple:
+
+    x_data:np.ndarray = data[0]
+    y_data:np.ndarray = data[1]
+    z_data:np.ndarray = data[2]
+    time_data:np.ndarray = data[3]
+
+    sign_list:list = []
+    d_location:list = []
+    
+    sign_flag = False
+
+    for i in  range (1, x_data.size):
+        dx = 1
+        t_act = time_data[i-1]
+        x_act = x_data[i-1]
+        y_act = y_data[i-1]
+        z_act = z_data[i-1]
+
+        if int(str(t_act).split(".")[1]) != 0:
+        
+            t_next =  float(time_data[i])
+            x_next = float(x_data[i])
+            t_diff = float(t_next - t_act)
+                
+            dx = float(x_next- x_act)/t_diff
+            # dx = y_act + 3*(x_act**2) - x_act**3 - z_act + e
+
+
+
+            if sign_flag:
+                dx_sign = np.sign([dx])[0]
+                sign_list.append(-dx_sign)
+                sign_flag = False
+            
+            # if dx<0:
+            #     dx*=-1.0
+
+            # if dx -0.03 <= 0:
+
+
+            if dx  == 0:
+                sign_flag = True
+                d_location.append(i-1)
+            
+            t_act = t_next
+            x_act = x_next
+            
     return (d_location, sign_list)
 
 name_dir = "./data/executions_HR/c/"
