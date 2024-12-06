@@ -61,7 +61,7 @@ def detect_points(data:np.ndarray, tol:int)->tuple:
     return (firsts_location, lasts_location)
 
 name_dir = "./data/executions_HR/c/"
-name_file = "HR_chaotic_continue_c.csv"
+name_file = "HR_regular_continue_c.csv"
 time_end = 12500
 
 if __name__=="__main__":
@@ -97,14 +97,14 @@ if __name__=="__main__":
     list_t = df['time'].to_list()
     plt.xlim([ min(list_t), max(list_t)])
 
-    plt.savefig("graphs/executions_DP/"+name+ '.png')
+    plt.savefig("graphs/executions_DP/"+name+ '.png', bbox_inches='tight')
 
     plt.plot( [list_t[i] for i in firsts_location]  , [list_x[i] for i in firsts_location] , marker='.', ls='none', ms=10, color='r')
     plt.plot( [list_t[i] for i in lasts_location]  , [list_x[i] for i in lasts_location] , marker='.', ls='none', ms=10, color='g')
 
     
 
-    plt.savefig("graphs/executions_DP/"+name+ '_pointed.png')
+    plt.savefig("graphs/executions_DP/"+name+ '_pointed.png', bbox_inches='tight')
     plt.close()
 
     df_values = pd.DataFrame()
@@ -352,5 +352,8 @@ if __name__=="__main__":
 
     plt.legend(loc='lower left',handles=[period_lines[0], burst_lines[0], interburst_lines[0]], labels=['period', 'burst duration', 'interburst interval'])
 
-    plt.savefig("graphs/executions_DP/"+name+ '_lines.png')
+    plt.savefig("graphs/executions_DP/"+name+ '_lines.png', bbox_inches='tight')
     plt.close()
+
+
+    plt.figure(figsize =(10, 7))
