@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from math import e
 def detect_points(data:np.ndarray, tol:int)->tuple:
 
     x_data:np.ndarray = data[0]
@@ -16,13 +15,12 @@ def detect_points(data:np.ndarray, tol:int)->tuple:
 
 
 
-    last_point_valley:bool=False
+    last_point_valley:bool=True
     spike_marked:bool=True
     spike:int=-1
 
 
     for i in  range (1, x_data.size):
-        dx = 1
         t_act = time_data[i-1]
         x_act = x_data[i-1]
 
@@ -61,7 +59,7 @@ def detect_points(data:np.ndarray, tol:int)->tuple:
     return (firsts_location, lasts_location)
 
 name_dir = "./data/executions_HR/c/"
-name_file = "HR_regular_continue_c.csv"
+name_file = "HR_chaotic_continue_c.csv"
 time_end = 12500
 
 if __name__=="__main__":
@@ -197,7 +195,7 @@ if __name__=="__main__":
     times_bursts = list()
 
     if df_firsts['time'].values[0] > df_lasts['time'].values[0]:
-        # normal secuence first - last
+        # secuence last - first
 
         prev_first = None
         prev_last = None
@@ -251,14 +249,14 @@ if __name__=="__main__":
                 prev_last = time_last
                     
     else:
-        # secuence last - first
+        # normal secuence first - last
 
         prev_first = None
         prev_last = None
 
         for i in range(max(len(df_firsts['first'].values), len(df_lasts['last'].values))):
 
-            if i < len (df_firsts['time'].values):
+            if i < len ( df_firsts['time'].values):
                 time_first = df_firsts['time'].values[i]
             else:
                 time_first = None
@@ -269,38 +267,44 @@ if __name__=="__main__":
                 time_last = None
             
 
-
             if time_first != None and time_last != None:
-                times_interbursts.append(time_last)
+                times_bursts.append(time_first)
 
                 bursts_durations.append(time_last-time_first)
-
+                    
                 if prev_last != None:
-                        interbursts.append(prev_last-time_first)
-      
+                        times_interbursts.append(prev_last)
+
+                        interbursts.append(time_first-prev_last)
                 else:
+                        
+                        times_interbursts.append(None)
                         interbursts.append(None)
 
                 if prev_first != None:
+                     
+                        times_periods.append(prev_first)
                         periods.append(time_first-prev_first)
                 else:
+                        
+                        times_periods.append(None)
                         periods.append(None)
 
-
             elif time_first != None :
-                    times_interbursts.append(time_last)
-                    interbursts.append(time_first-prev_last)
+                    times_periods.append(prev_first)
+                    times_interbursts.append(prev_last)
+                    times_bursts.append(None)
 
                     bursts_durations.append(None)
 
+                    interbursts.append(time_first-prev_last)
+
                     periods.append(time_first-prev_first)
-            
+
             if time_first != None:
                 prev_first = time_first
             if time_last != None:
                 prev_last = time_last
-
-
 
 
     df_analyzed_values['time_period'] =times_periods
@@ -334,6 +338,7 @@ if __name__=="__main__":
     bursts_list =  [[time, bursts+time] for time, bursts in df_bursts.values]
 
 
+
     for pair in periods_list:
         val=2.1
         if periods_list.index(pair) %2==0:
@@ -355,5 +360,26 @@ if __name__=="__main__":
     plt.savefig("graphs/executions_DP/"+name+ '_lines.png', bbox_inches='tight')
     plt.close()
 
+    total_time = df["time"].count()-1
 
-    plt.figure(figsize =(10, 7))
+    intervals_values = [
+       df_periods['period_duration'],
+       [interburst for time, interburst in df_interbursts.values],
+       ([ bursts for time, bursts in df_bursts.values])
+    ]
+    labels = ['Period', 'IBI', 'BD']
+    colors = ['orange', 'green', 'blue']
+
+    fig, ax = plt.subplots()
+    ax.set_ylabel('Interval duration')
+
+    bplot = ax.boxplot(intervals_values,whis=1000,
+                    patch_artist=True, labels=labels, widths=0.7,
+                    flierprops=dict(markeredgecolor='none', markerfacecolor='none', markersize=0)) 
+
+    for patch, color in zip(bplot['boxes'], colors):
+        patch.set_facecolor(color)
+
+
+    plt.savefig("graphs/executions_DP/"+name+ '_box.png', bbox_inches='tight')
+    plt.close()
