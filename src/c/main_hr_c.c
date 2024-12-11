@@ -29,8 +29,8 @@ int main()
     long regular_lines, chaotic_lines, regular_lines_continue, chaotic_lines_continue;
     int i = 0, save_every = 100;
     const char *filename = "./data/timings_HR/speed_c.csv";
-    float e=3.0, e_chaotic=3.281,S = 1.0, v =0.1;
-    float loop_1 = 10000.0, loop_continue = 20000.0;
+    float e=3.0, e_chaotic=3.281,S = 4.0, v =1.0;
+    float loop_1 = 10000.0, loop_continue = 200000.0;
     clock_t clock(void);
     FILE *fptr;
 

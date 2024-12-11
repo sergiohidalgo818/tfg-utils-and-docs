@@ -10,6 +10,8 @@ By Sergio Hidalgo
   - [Results](#results)
     - [Old model](#old-model)
     - [New model](#new-model)
+  - [Histograms](#histograms)
+
 
 ## Introduction
 This document shows a provisional algorithm to analyize the nature of the spikes in a model, the models used in this case are the Hindmarsh-Rose model with $S=4$ and $v=1$ and the same model with $S=1$ and $v=0.1$, with both the regular and chaotic configuration.
@@ -135,3 +137,19 @@ Regular simulation durations      | Chaotic simulation durations |
 ![Regular simulation intervals](images/spike_analysis/new_hr/HR_regular_continue_c_box.png "Regular simulation intervals") |![Chaotic simulation boxes](images/spike_analysis/new_hr/HR_chaotic_continue_c_box.png "Chaotic simulation boxes") |
 
 In contrast with the old model, here another neuron could be bursting within the interburst interval, but the variation and chaotic nature of the model are losen.
+
+
+## Histograms
+
+Regular simulation old model histogram      | Regular simulation new model histogram |
+:-------------------------:|:-------------------------:|
+![Regular simulation old model histogram](images/spike_analysis/old_hr/HR_regular_continue_c_hist.png "Regular simulation old model histogram") |![Regular simulation first spike and last spike detection](images/spike_analysis/new_hr/HR_regular_continue_c_hist.png "Regular simulation new model histogram") 
+
+The regular simulation, obiously generates same ammount of intra and inter bursts. 
+
+Chaotic simulation old model histogram   | Chaotic simulation new model histogram  
+:-------------------------:|:-------------------------:|
+![Chaotic simulation old model histogram ](images/spike_analysis/old_hr/HR_chaotic_continue_c_hist.png "Chaotic simulation old model histogram ") | ![Chaotic simulation new model histogram](images/spike_analysis/new_hr/HR_chaotic_continue_c_hist.png "Chaotic simulation new model histogram") 
+
+
+In the chaotic simulation of the old model, the difference can be apreciated, tipically the interbursts have less duration than the bursts. 

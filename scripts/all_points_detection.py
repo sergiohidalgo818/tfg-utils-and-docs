@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+
 def detect_points(data:np.ndarray, tol:int)->tuple:
 
     x_data:np.ndarray = data[0]
@@ -59,7 +60,7 @@ def detect_points(data:np.ndarray, tol:int)->tuple:
     return (firsts_location, lasts_location)
 
 name_dir = "./data/executions_HR/c/"
-name_file = "HR_chaotic_continue_c.csv"
+name_file = "HR_regular_continue_c.csv"
 time_end = 12500
 
 if __name__=="__main__":
@@ -382,4 +383,26 @@ if __name__=="__main__":
 
 
     plt.savefig("graphs/executions_DP/"+name+ '_box.png', bbox_inches='tight')
+    plt.close()
+
+    # plt.hist([interburst+time for time, interburst in df_interbursts.values])
+    # plt.hist([bursts+time for time, bursts in df_bursts.values])
+    # plt.hist(df_bursts['burst_duration'], alpha=0.5, label='burst duration')
+    # fig, axs = plt.subplots(1, 2, sharey=True, tight_layout=True)
+    # axs[0].hist(df_bursts['burst_duration'], bins=20)
+    # axs[1].hist(df_interbursts['interburst_duration'], bins=20)
+
+    fig, axs = plt.subplots(1, 2, sharey=True, tight_layout=True)
+
+    df_bursts['burst_duration'] = df_bursts['burst_duration'].apply(lambda x: int(x))
+    df_interbursts['interburst_duration'] = df_interbursts['interburst_duration'].apply(lambda x: int(x))
+    axs[0].hist(df_bursts['burst_duration'], bins=20)
+    axs[0].set_xlabel('burst duration')
+    axs[0].set_ylabel('ocurrences')
+    axs[1].hist(df_interbursts['interburst_duration'], bins=20)
+    axs[1].set_xlabel('interburst duration')
+
+    
+
+    plt.savefig("graphs/executions_DP/"+name+ '_hist.png', bbox_inches='tight')
     plt.close()
