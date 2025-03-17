@@ -11,7 +11,8 @@ Por Sergio Hidalgo
   - [Seleccionar el USB en la BIOS](#seleccionar-el-usb-en-la-bios)
   - [Seguir los pasos](#seguir-los-pasos)
 - [Instalar los siguientes paquetes](#instalar-los-siguientes-paquetes)
-- [Instalar Preempt RT](#instalar-preempt-rt)
+- [Instalar Preempt RT sin Ubuntu Pro](#instalar-preempt-rt-sin-ubuntu-pro)
+- [Instalar Preempt RT con Ubuntu Pro](#instalar-preempt-rt-con-ubuntu-pro)
   - [Crear cuenta en Ubuntu One](#crear-cuenta-en-ubuntu-one) 
   - [Obtener Ubuntu Pro](#obtener-ubuntu-pro) 
   - [Añadir el sistema a la cuenta](#añadir-el-sistema-a-la-cuenta) 
@@ -63,12 +64,22 @@ Esto se puede hacer con el siguiente comando
 sudo apt install git make gcc autoconf dkms -y
 ```
 
-## Instalar Preempt RT
+## Instalar Preempt RT sin Ubuntu Pro
 
-En las nuevas versiones de Ubuntu, esta instalación es muy sencilla. Hace falta
-una cuenta _Ubuntu Pro_, pero esta es gratis para activar hasta 5 máquinas
-simultáneas con una sola cuenta. A continuación se exponen los pasos a realizar
-para obtener dicha cuenta.
+
+Se deben ejecutar los siguientes comandos:
+
+```bash
+sudo add-apt-repository ppa:canonical-kernel-team/ppa
+sudo apt-get install linux-realtime
+```
+
+
+## Instalar Preempt RT con Ubuntu Pro
+
+En las nuevas versiones de Ubuntu, esta instalación es muy sencilla. Se puede hacer ,mediante una cuenta _Ubuntu Pro_, es gratis y se pueden activar hasta 5 máquinas
+simultáneas con una sola cuenta. 
+
 
 ### Crear cuenta en Ubuntu One
 
