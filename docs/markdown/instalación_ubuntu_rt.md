@@ -66,6 +66,7 @@ sudo apt install git make gcc autoconf dkms -y
 
 ## Instalar Preempt RT sin Ubuntu Pro
 
+**Nota:** este metodo puede dar problemas de resolución en caso de tener una gráfica dedicada y otros inconvenientes, la otra solución es la solución oficial y por tanto la recomendada.
 
 Se deben ejecutar los siguientes comandos:
 
@@ -87,7 +88,7 @@ Nos dirigimos a la [página de login de Ubuntu](https://login.ubuntu.com/) y
 seleccionamos "I don’t have an Ubuntu One account" y seguimos los pasos para su
 creación.
 
-![Creación de cuenta](images/instalación_ubuntu_rt/ubuntu_one.png "Creación de cuenta"){ width=75% }
+![Creación de cuenta](images/instalación_ubuntu_rt/ubuntu_one.png "Creación de cuenta")
 
 
 ### Obtener Ubuntu Pro
@@ -97,14 +98,14 @@ Una vez ya hemos creado la cuenta, vamos al
 Ubuntu e iniciamos sesión si no se ha iniciado automáticamente. Una vez en ahí,
 seleccionamos "Myself" y le damos a "Register".
 
-![Ubuntu Pro](images/instalación_ubuntu_rt/ubuntu_pro.png "Ubuntu Pro"){ width=75% }
+![Ubuntu Pro](images/instalación_ubuntu_rt/ubuntu_pro.png "Ubuntu Pro")
 
 ### Añadir el sistema a la cuenta
 
 Dentro del apartado de ["Your subscriptions"](https://ubuntu.com/pro/dashboard)
 se encuetra el `token` que necesitamos añadir a la máquina.
 
-![Ubuntu token](images/instalación_ubuntu_rt/ubuntu_token.png "Ubuntu token"){ width=75% }
+![Ubuntu token](images/instalación_ubuntu_rt/ubuntu_token.png "Ubuntu token")
 
 Con el siguiente comando lo añadimos a Ubuntu.
 
