@@ -18,6 +18,7 @@ Por Sergio Hidalgo
   - [Añadir el sistema a la cuenta](#añadir-el-sistema-a-la-cuenta) 
   - [Instalar el kernel realtime](#instalar-el-kernel-realtime) 
   - [Comprobar el kernel](#comprobar-el-kernel)
+- [Reinstalar drivers de la GPU](#reinstalar-drivers-de-la-gpu)
 - [RTHybrid](#rthybrid)
   - [Descargar dependencias](#descargar-dependencias)
   - [Descargar drivers Comedi](#descargar-drivers-comedi)
@@ -65,8 +66,6 @@ sudo apt install git make gcc autoconf dkms -y
 ```
 
 ## Instalar Preempt RT sin Ubuntu Pro
-
-**Nota:** este metodo puede dar problemas de resolución en caso de tener una gráfica dedicada y otros inconvenientes, la otra solución es la solución oficial y por tanto la recomendada.
 
 Se deben ejecutar los siguientes comandos:
 
@@ -150,7 +149,24 @@ uname -a
 ```
 
 
-# RTHybrid
+## Reinstalar drivers de la GPU
+
+En algunos casos, como con las gráficas de Nvidia, los drivers de la GPU con el kernel realtime darán fallos. En esos casos se debe de:
+
+Asegurar que los paquetes y headers del kernel están instalados:
+```bash
+sudo apt update
+sudo apt install dkms build-essential libglvnd-dev linux-headers-$(uname -r)
+```
+
+Si el problema persiste, desinstalar los drivers:
+```bash
+sudo apt remove --purge '^nvidia-.*'
+sudo apt autoremove
+sudo apt clean
+```
+
+## RTHybrid
 ### Descargar dependencias
 
 Las siguientes librerías son dependencias de RTHybrid:
