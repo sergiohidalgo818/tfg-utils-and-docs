@@ -11,12 +11,14 @@ Por Sergio Hidalgo
   - [Seleccionar el USB en la BIOS](#seleccionar-el-usb-en-la-bios)
   - [Seguir los pasos](#seguir-los-pasos)
 - [Instalar los siguientes paquetes](#instalar-los-siguientes-paquetes)
-- [Instalar Preempt RT](#instalar-preempt-rt)
+- [Instalar Preempt RT sin Ubuntu Pro](#instalar-preempt-rt-sin-ubuntu-pro)
+- [Instalar Preempt RT con Ubuntu Pro](#instalar-preempt-rt-con-ubuntu-pro)
   - [Crear cuenta en Ubuntu One](#crear-cuenta-en-ubuntu-one) 
   - [Obtener Ubuntu Pro](#obtener-ubuntu-pro) 
   - [Añadir el sistema a la cuenta](#añadir-el-sistema-a-la-cuenta) 
   - [Instalar el kernel realtime](#instalar-el-kernel-realtime) 
   - [Comprobar el kernel](#comprobar-el-kernel)
+- [Reinstalar drivers de la GPU](#reinstalar-drivers-de-la-gpu)
 - [RTHybrid](#rthybrid)
   - [Descargar dependencias](#descargar-dependencias)
   - [Descargar drivers Comedi](#descargar-drivers-comedi)
@@ -63,12 +65,21 @@ Esto se puede hacer con el siguiente comando
 sudo apt install git make gcc autoconf dkms -y
 ```
 
-## Instalar Preempt RT
+## Instalar Preempt RT sin Ubuntu Pro
 
-En las nuevas versiones de Ubuntu, esta instalación es muy sencilla. Hace falta
-una cuenta _Ubuntu Pro_, pero esta es gratis para activar hasta 5 máquinas
-simultáneas con una sola cuenta. A continuación se exponen los pasos a realizar
-para obtener dicha cuenta.
+Se deben ejecutar los siguientes comandos:
+
+```bash
+sudo add-apt-repository ppa:canonical-kernel-team/ppa
+sudo apt-get install linux-realtime
+```
+
+
+## Instalar Preempt RT con Ubuntu Pro
+
+En las nuevas versiones de Ubuntu, esta instalación es muy sencilla. Se puede hacer ,mediante una cuenta _Ubuntu Pro_, es gratis y se pueden activar hasta 5 máquinas
+simultáneas con una sola cuenta. 
+
 
 ### Crear cuenta en Ubuntu One
 
@@ -76,7 +87,7 @@ Nos dirigimos a la [página de login de Ubuntu](https://login.ubuntu.com/) y
 seleccionamos "I don’t have an Ubuntu One account" y seguimos los pasos para su
 creación.
 
-![Creación de cuenta](images/instalación_ubuntu_rt/ubuntu_one.png "Creación de cuenta"){ width=75% }
+![Creación de cuenta](images/instalación_ubuntu_rt/ubuntu_one.png "Creación de cuenta")
 
 
 ### Obtener Ubuntu Pro
@@ -86,14 +97,14 @@ Una vez ya hemos creado la cuenta, vamos al
 Ubuntu e iniciamos sesión si no se ha iniciado automáticamente. Una vez en ahí,
 seleccionamos "Myself" y le damos a "Register".
 
-![Ubuntu Pro](images/instalación_ubuntu_rt/ubuntu_pro.png "Ubuntu Pro"){ width=75% }
+![Ubuntu Pro](images/instalación_ubuntu_rt/ubuntu_pro.png "Ubuntu Pro")
 
 ### Añadir el sistema a la cuenta
 
 Dentro del apartado de ["Your subscriptions"](https://ubuntu.com/pro/dashboard)
 se encuetra el `token` que necesitamos añadir a la máquina.
 
-![Ubuntu token](images/instalación_ubuntu_rt/ubuntu_token.png "Ubuntu token"){ width=75% }
+![Ubuntu token](images/instalación_ubuntu_rt/ubuntu_token.png "Ubuntu token")
 
 Con el siguiente comando lo añadimos a Ubuntu.
 
@@ -138,7 +149,24 @@ uname -a
 ```
 
 
-# RTHybrid
+## Reinstalar drivers de la GPU
+
+En algunos casos, como con las gráficas de Nvidia, los drivers de la GPU con el kernel realtime darán fallos. En esos casos se debe de:
+
+Asegurar que los paquetes y headers del kernel están instalados:
+```bash
+sudo apt update
+sudo apt install dkms build-essential libglvnd-dev linux-headers-$(uname -r)
+```
+
+Si el problema persiste, desinstalar los drivers:
+```bash
+sudo apt remove --purge '^nvidia-.*'
+sudo apt autoremove
+sudo apt clean
+```
+
+## RTHybrid
 ### Descargar dependencias
 
 Las siguientes librerías son dependencias de RTHybrid:
