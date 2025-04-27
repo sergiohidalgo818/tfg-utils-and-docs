@@ -47,3 +47,8 @@ You will need to tell the installer to ignore the presence of the RT system, oth
 ```bash
 sudo IGNORE_PREEMPT_RT_PRESENCE=1 bash NVIDIA-Linux-x86_64-570.144.run 
 ```
+
+
+### Maximum performance
+
+If you are having issues with GNOME animations, go to *NVIDIA X Server Settings* and under "PowerMizer", set "Preferred Mode" to "Prefer Maximum Performance" 
