@@ -1,0 +1,58 @@
+Script started on 2025-06-03 23:40:46+02:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="120" LINES="25"]
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ tree tuts_and_reports/s^C[?2004l[?2004h[?2004l
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ ls
+[?2004l[0m[01;34mbin[0m  [01;34mdocs[0m  [01;34mgraphs[0m  [01;34minclude[0m  makefile  README.md  [01;34mresources[0m  [01;34mscripts[0m  [01;34msrc[0m  [01;34mtuts_and_reports[0m  typescript
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ s[Kls scripts/
+[?2004lall_points_detection.py           generate_hidmarsh_rose_syn_graphs.py  hindmarsh_rose.bash
+generate_graphs.py                generate_pdfs.bash                    hindmarsh_rose_syn.bash
+generate_hidmarsh_rose_graphs.py  generate_rulkov_map_graphs.py         rulkov_map.bash
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ sudo shj[K graphs/[K[K[K[K[K[K[Kscripts/ga[Kenetr[K[Krate_pdfs.bash[3Pcripts/generate_pdfs.bashbscripts/generate_pdfs.bashascripts/generate_pdfs.bash[Cscripts/generate_pdfs.bashhscripts/generate_pdfs.bash scripts/generate_pdfs.bash
+[?2004l[sudo] password for seregio: 
+sudo: a password is required
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ sudo bash scripts/generate_pdfs.bash[5P
+[?2004lgenerating aislamiento_cpu.pdf
+Error producing PDF.
+! LaTeX Error: Unicode character ⚠ (U+26A0)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 ⚠
+
+generating drivers_nvidia_rt.pdf
+generating encontrando_el_bottleneck.pdf
+generating instalacion_debian_rt.pdf
+generating instalación_ubuntu_rt.pdf
+generating parameter_update_hr.pdf
+generating recursos.pdf
+generating spike_analysis.pdf
+generating synapsis_between_hr.pdf
+generating synapsis_hr.pdf
+generating tutorial-ni.pdf
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ bash scripts/generate_pdfs.bash
+[?2004lgenerating aislamiento_cpu.pdf
+generating drivers_nvidia_rt.pdf
+generating encontrando_el_bottleneck.pdf
+generating instalacion_debian_rt.pdf
+generating instalación_ubuntu_rt.pdf
+generating parameter_update_hr.pdf
+generating recursos.pdf
+generating spike_analysis.pdf
+generating synapsis_between_hr.pdf
+generating synapsis_hr.pdf
+generating tutorial-ni.pdf
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-utils-and-docs[01;32mseregio@seregio-debian[00m:[01;34m~/Desktop/cositas/uni/5o/tfg-utils-and-docs[00m$ bash scripts/generate_pdfs.bash
+[?2004lgenerating aislamiento_cpu.pdf
+generating drivers_nvidia_rt.pdf
+generating encontrando_el_bottleneck.pdf
+generating instalacion_debian_rt.pdf
+generating instalación_ubuntu_rt.pdf
+generating parameter_update_hr.pdf
+generating recursos.pdf
+generating spike_analysis.pdf
+generating synapse_hr.pdf
+generating synapses_between_hr.pdf
+generating tutorial-ni.pdf
+[?2004h]0;seregio@seregio-debian: ~/Desktop/cositas/uni/5o/tfg-

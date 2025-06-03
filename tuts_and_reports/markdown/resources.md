@@ -1,4 +1,4 @@
-# Recursos TFG
+# Resources TFG
 
 ## Real-Time Operating Systems
 

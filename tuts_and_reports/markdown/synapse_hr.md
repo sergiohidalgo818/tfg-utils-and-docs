@@ -8,12 +8,12 @@ By Sergio Hidalgo
   - [Graphs](#graphs)
 
 ## Introduction
-This document shows the results from two programs that simulates the fast synapis between two Hindmarsh-Rose neurons.
+This document shows the results from two programs that simulates the fast synapse between two Hindmarsh-Rose neurons.
 
 ## Parameters
 The parameters choosed are based on the file *"pract3-15.pdf"* inside the directory **`resources/`**.
 
-The values $S_{fast}=0.44$, $V_{fast}=-1.66$, $E_{syn}=-1.92$ for Hindmarsh-Rose synapsis, are obtained from **Table 2**.
+The values $S_{fast}=0.44$, $V_{fast}=-1.66$, $E_{syn}=-1.92$ for Hindmarsh-Rose synapses, are obtained from **Table 2**.
 
 The **Table 3** of the document shows the values of maximal conductance, and we can see that *LP* neuron and *PY* neuron have a both values between them. 
 So neuron1 will be *LP* and neuron2 *PY*, being $gfast_{1}=0.241$ and $gfast_{2}=0.186$.

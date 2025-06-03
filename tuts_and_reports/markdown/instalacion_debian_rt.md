@@ -3,7 +3,11 @@
 
 ## Instalación de Debian
 
+Instalar debian desde un USB.
+
 ## Instalación de preempt-rt
+
+Una vez instalado, seguir los siguientes pasos.
 
 ### Versión del kernel
 

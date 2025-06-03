@@ -14,16 +14,16 @@ By Sergio Hidalgo
 
 
 ## Introduction
-This document shows a provisional algorithm to analyize the nature of the spikes in a model, the models used in this case are the Hindmarsh-Rose model with $S=4$ and $v=1$ and the same model with $S=1$ and $v=0.1$, with both the regular and chaotic configuration.
+This document shows a provisional algorithm to analyze the nature of the spikes in a model, the models used in this case are the Hindmarsh-Rose model with $S=4$ and $v=1$ and the same model with $S=1$ and $v=0.1$, with both the regular and chaotic configuration.
 
 ## Strategy
-The first approach to this problem is to get the points's sign with the *derivative* (if it is **positive** is ascending, and if it's **negative** it's descending), checking the change of sign between some points.  If this sign changing is on a point bellow some tolerance, then a *"big valley"* (or **interbust interval**) have passed. Having this in mind we can catalog the two maximums that are aside from this interval, being the first maximum the last spike in the burst, and the second one the first spike in the actual burst.
+The first approach to this problem is to get the points sign with the *derivative* (if it is **positive** is ascending, and if it's **negative** it's descending), checking the change of sign between some points.  If this sign changing is on a point bellow some tolerance, then a *"big valley"* (or **interbust interval**) have passed. Having this in mind we can catalog the two maximums that are aside from this interval, being the first maximum the last spike in the burst, and the second one the first spike in the actual burst.
 
 ## Problems on the practical implementation
 There are two main problems to be solved. The first one is that the last spike its only detected when the first half of the interbust intervarl have passed, so there is no response window to respond in real time. The second one is the tolerance parameter, because it can vary from neuron to neuron, probably a heuristic to estimate the value is needed.
 
 ## Algorithm
-The following implementation of the algorithm it's for data that have already occurred. This can be changed if the list of locations and flags are passed as arguments and retorned at the end of the iterations (or if the loop it's infinit and instead of reading a array of data, it reads a pipeline or a file that gets updated).
+The following implementation of the algorithm it's for data that have already occurred. This can be changed if the list of locations and flags are passed as arguments and returned at the end of the iterations (or if the loop it's infinite and instead of reading a array of data, it reads a pipeline or a file that gets updated).
 
 The algorithm implementation in python:
 ```python
@@ -109,7 +109,7 @@ Regular simulation durations      | Chaotic simulation durations |
 :-------------------------:|:-------------------------:|
 ![Regular simulation intervals](images/spike_analysis/old_hr/HR_regular_continue_c_box.png "Regular simulation intervals") |![Chaotic simulation boxes](images/spike_analysis/old_hr/HR_chaotic_continue_c_box.png "Chaotic simulation boxes") |
 
-Here it can be seen that the period and the burst duration have more variation on the chaotic model, but the interburst interval doesn't change and neither leaves any time to other posible neuront to burst in **antiphase**.
+Here it can be seen that the period and the burst duration have more variation on the chaotic model, but the interburst interval doesn't change and neither leaves any time to other possible neurons to burst in **antiphase**.
 
 
 ### New model
@@ -136,7 +136,7 @@ Regular simulation durations      | Chaotic simulation durations |
 :-------------------------:|:-------------------------:|
 ![Regular simulation intervals](images/spike_analysis/new_hr/HR_regular_continue_c_box.png "Regular simulation intervals") |![Chaotic simulation boxes](images/spike_analysis/new_hr/HR_chaotic_continue_c_box.png "Chaotic simulation boxes") |
 
-In contrast with the old model, here another neuron could be bursting within the interburst interval, but the variation and chaotic nature of the model are losen.
+In contrast with the old model, here another neuron could be bursting within the interburst interval, but the variation and chaotic nature of the model is lost.
 
 
 ## Histograms
@@ -145,7 +145,7 @@ Regular simulation old model histogram      | Regular simulation new model histo
 :-------------------------:|:-------------------------:|
 ![Regular simulation old model histogram](images/spike_analysis/old_hr/HR_regular_continue_c_hist.png "Regular simulation old model histogram") |![Regular simulation first spike and last spike detection](images/spike_analysis/new_hr/HR_regular_continue_c_hist.png "Regular simulation new model histogram") 
 
-The regular simulation, obiously generates same ammount of intra and inter bursts. 
+The regular simulation, obviously generates same amount of intra and inter bursts. 
 
 Chaotic simulation old model histogram   | Chaotic simulation new model histogram  
 :-------------------------:|:-------------------------:|

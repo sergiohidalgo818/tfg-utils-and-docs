@@ -18,8 +18,6 @@ Después se ha usado la rama `pico-neuron-not-pico`, que es una versión modific
 ## El problema está en el software
 
 
-
-
 ### Pico sin escritura
 
 Se ha 800 segundos simulados sin escritura. Ha tardado 31 segundos reales.
@@ -29,6 +27,7 @@ Se ha 800 segundos simulados sin escritura. Ha tardado 31 segundos reales.
 Se ha 800 segundos simulados con escritura. Ha tardado 615 segundos reales.
 
 ### Solución
+
 Un core lógico y otro de escritura, el lógico solo manda datos una vez han sido consumidos por el de escritura.
 
 
