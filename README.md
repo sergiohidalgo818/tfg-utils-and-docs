@@ -112,12 +112,12 @@ Under `tuts_and_reports/` directory.
   - [PDF file](tuts_and_reports/spike_analysis.pdf)
   - Language: English
 
-- Synapses between HR neurons: Study of the interaction and connectivity in Hindmarsh-Rose neuron models.
+- Synapses between HR neurons: Shows the interaction and connectivity in Hindmarsh-Rose neuron models.
   - [Markdown file](tuts_and_reports/markdown/synapses_between_hr.md)
   - [PDF file](tuts_and_reports/synapses_between_hr.pdf)
   - Language: English
 
-- Synapse in HR model: Specific focus on different synaptic dynamics within the HR model.
+- Synapse in HR model: Synaptic dynamics of the HR model.
   - [Markdown file](tuts_and_reports/markdown/synapse_hr.md)
   - [PDF file](tuts_and_reports/synapse_hr.pdf)
   - Language: English
@@ -127,7 +127,7 @@ Under `tuts_and_reports/` directory.
   - [PDF file](tuts_and_reports/tutorial-ni.pdf)
   - Language: Spanish
 
-- Resources: Compilation of useful links, used on the research.
+- Resources: Compilation of useful links and concepts used on the research.
   - [Markdown file](tuts_and_reports/markdown/resources.md)
   - [PDF file](tuts_and_reports/resources.pdf)
   - Language: English
