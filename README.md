@@ -10,6 +10,7 @@
   - [Location](#location-4)
 - [Tutorials and Reports](#tutorials-and-reports)
   - [Location](#location-5)
+  - [Contents](#contents)
 - [Scripts](#scripts)
   - [Location](#location-6)
 - [Graphs](#graphs)
@@ -72,7 +73,7 @@ Diverse tutorials and reports, from results of executions to `preempt-rt` instal
 
 Under `tuts_and_reports/` directory.
 
-### Tutorials
+### Contents
 
 - CPU isolation: A tutorial that explains how to isolate a CPU core.
   - [Markdown file](tuts_and_reports/markdown/aislamiento_cpu.md)
