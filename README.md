@@ -95,9 +95,9 @@ Under `tuts_and_reports/` directory.
   - [PDF file](tuts_and_reports/instalacion_debian_rt.pdf)
   - Language: Spanish
 
-- Ubuntu RT installation: Step-by-step guide to install Ubuntu with a Real-Time kernel and RTHybrid. 
 > [!WARNING]
 > Do not install comedi if you are willing to use RTXI. Install NI drivers instead. 
+- Ubuntu RT installation: Step-by-step guide to install Ubuntu with a Real-Time kernel and RTHybrid. 
   - [Markdown file](tuts_and_reports/markdown/instalación_ubuntu_rt.md)
   - [PDF file](tuts_and_reports/instalación_ubuntu_rt.pdf)
   - Language: Spanish
